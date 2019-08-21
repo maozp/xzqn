@@ -6,13 +6,16 @@ import com.gangukeji.xzqn.service.AuthSignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @RequestMapping("/sign")
 //@Api(tags = {"用户签到打卡API"}
 public class AuthSignController {
-    private final AuthSignService authSignService;
+
+    @Resource
+    AuthSignService authSignService;
 
 
 
