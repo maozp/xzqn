@@ -1,0 +1,33 @@
+server:
+  url: https://www.xiaozheng8.com/
+  ip: 47.111.171.242
+  payCallBack: https://www.xiaozheng8.com/payCallBack
+  port: 443
+  ssl:
+#    key-store: 2211226_www.xiaozheng8.com.key
+    key-store: my.keystore
+    key-alias: mykey
+    enabled: true
+    key-store-password: 123456
+    key-store-type: JKS
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  datasource:
+    username: hx
+    password: hx123456
+    url: jdbc:mysql://localhost:3306/xzqn_dev3?characterEncoding=utf8&serverTimezone=GMT%2B8
+  application:
+    name: 小镇青年开发中
+  servlet:
+    multipart:
+      #      100MB
+      max-file-size: 100000000
+      max-request-size: 100000000
+  resources:
+    static-locations: /root/xzqn/static
+logging:
+  level:
+    com.gangukeji.xzqn: error

@@ -1,0 +1,32 @@
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#    show-sql: true
+#  datasource:
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://localhost:3306/xzqn_dev3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+#  application:
+#    name: basic_dev
+#server:
+#  port: 8002
+#server:
+#  port: 443
+##  ssl:
+##    key-store: xzqn.keystore
+##    key-alias: xzqn
+##    enabled: true
+##    key-store-password: 123456
+##    key-store-type: JKS
+#spring:
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#    show-sql: true
+#  datasource:
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://localhost:3306/xzqn_dev3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+#  application:
+#    name: basic_dev

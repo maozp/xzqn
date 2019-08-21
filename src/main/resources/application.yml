@@ -1,0 +1,30 @@
+spring:
+#  jackson:
+#    serialization:
+#      wrap-root-value: true
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/xzqn_dev3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+  application:
+    name: basic_dev
+  servlet:
+    multipart:
+#      3MB
+      max-file-size: -1
+      max-request-size: -1
+#  profiles:
+#    active: myserver
+server:
+  port: 8002
+  url: localhost:8002/
+  ip: 47.111.171.242
+  payCallBack: https://www.xiaozheng8.com/payCallBack
+logging:
+  level:
+    com.gangukeji.xzqn: error

@@ -1,0 +1,18 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://129.28.157.228:3366/xzqn_dev3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+  application:
+    name: basic_dev
+  servlet:
+    multipart:
+#      3MB
+      max-file-size: -1
+      max-request-size: -1
+server:
+  port: 8002
