@@ -54,7 +54,7 @@ public class ShopLoginController {
      */
     @PostMapping("/login")
     @Log("shop登录")
-    public Result login(@RequestBody String data) {
+    public Result login(@RequestBody String data){
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         XzqnShopUser user;
         String openid = null;

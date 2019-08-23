@@ -48,10 +48,11 @@ public class AuthSignController {
             authSign.setSignContinueDays(1);
             authSign.setSignTotalDays(1);
             authSign.setIsSign(1);
-            Integer authId = authSignDao.save(authSign).getId();
-            HashMap<Object, Object> map = new HashMap<>();
-            map.put("id", authId);
-            return ResultUtils.success(200, "签到成功", map);
+            authSignDao.save(authSign);
+//            Integer authId = authSignDao.save(authSign).getId();
+//            HashMap<Object, Object> map = new HashMap<>();
+//            map.put("id", authId);
+            return ResultUtils.success(200, "签到成功", authSign);
         }
         XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(userId);
         Date now = new Date();
@@ -71,16 +72,16 @@ public class AuthSignController {
             }
 
             System.out.println("师傅是否签到");
-            authSign.setSignTime(now);
             authSign.setSignLastTime(now);
             authSign.setSignPoint(authSign.getSignPoint()+3);
             authSign.setSignContinueDays(authSign.getSignContinueDays() + 1);
             authSign.setSignTotalDays(authSign.getSignTotalDays()+ 1);
             authSign.setIsSign(1);
-            Integer authId = authSignDao.save(authSign).getId();
-            HashMap<Object, Object> map = new HashMap<>();
-            map.put("id", authId);
-            return ResultUtils.success(200, "签到成功", map);
+            authSignDao.save(authSign);
+//            Integer authId = authSignDao.save(authSign).getId();
+//            HashMap<Object, Object> map = new HashMap<>();
+//            map.put("id", authId);
+            return ResultUtils.success(200, "签到成功",authSign);
         }
         return ResultUtils.success();
     }
