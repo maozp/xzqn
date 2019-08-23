@@ -28,10 +28,9 @@ import java.util.Objects;
 @RequestMapping("shop")
 public class ShopLoginController {
 
-    private final static String appid = WXPayConfig.appid;
-    private final static String secret = WXPayConfig.secret;
-    private final static String mchId = WXPayConfig.mchId;
-    private final static String key = WXPayConfig.key;
+    private final static String appid2 = WXPayConfig.appid2;
+    private final static String secret2 = WXPayConfig.secret2;
+
 
     @Resource
     ShopUserDao shopUserDao;
@@ -44,7 +43,7 @@ public class ShopLoginController {
      */
     public String getOpenid(String code) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
-        return new JsonParser().parse(Objects.requireNonNull(restTemplate.getForEntity("https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + secret + "&js_code=" + code + "&grant_type=authorization_code", String.class).getBody())).getAsJsonObject().get("openid").getAsString();
+        return new JsonParser().parse(Objects.requireNonNull(restTemplate.getForEntity("https://api.weixin.qq.com/sns/jscode2session?appid=" + appid2 + "&secret=" + secret2 + "&js_code=" + code + "&grant_type=authorization_code", String.class).getBody())).getAsJsonObject().get("openid").getAsString();
     }
 
     /**
