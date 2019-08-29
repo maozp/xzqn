@@ -200,7 +200,7 @@ public class ShopOrderController {
             String nonceStr = WXPayUtils.getElement(wxResp, "nonce_str");
             String sign = WXPayUtils.getElement(wxResp, "sign");
             respMap = new TreeMap<>();
-            respMap.put("appId", WXPayConfig.appid);
+            respMap.put("appId", WXPayConfig.appid2);
             respMap.put("nonceStr", nonceStr);
             respMap.put("package", "prepay_id=" + prePayId);
             respMap.put("signType", "MD5");

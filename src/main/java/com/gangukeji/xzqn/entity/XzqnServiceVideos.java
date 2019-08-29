@@ -44,4 +44,6 @@ public class XzqnServiceVideos {
     private Integer LikeNums;
     @Column
     private String videoImg;
+    @Column
+    private Integer videoReadNums;
 }

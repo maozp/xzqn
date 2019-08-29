@@ -68,8 +68,8 @@ public class ServiceVideosController {
     }
 
     //查询所有视频
-    @PostMapping("/findAll/{page}")
-    public Result videosFind(@PathVariable("page") int page)throws Exception{
+    @PostMapping("/findAll")
+    public Result videosFind(@RequestParam("page") int page)throws Exception{
        // Pageable pageable = new PageRequest(page, size);//2.0版本后,该方法已过时
         Sort sort = new Sort(Sort.Direction.DESC, "videodate");
         Pageable pageable = PageRequest.of(page, 5, sort);
@@ -108,10 +108,20 @@ public class ServiceVideosController {
 
     //查询所有视频
     @PostMapping("/videosFindAll")
-    public Result findAllVideos(){
-        return ResultUtils.success(200,"查看视频列表成功",serviceVideosDao.findAllOrderByVideosDate());
+    public Result findAllVideos(@RequestParam("page") int page){
+        Sort sort = new Sort(Sort.Direction.DESC, "videodate");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
+        return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
     }
-
+    //根据人气查询所有视频
+    @PostMapping("/videosReadFindAll")
+    public Result findAllVideosRead(@RequestParam("page") int page){
+        Sort sort = new Sort(Sort.Direction.DESC, "videoReadNums");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
+        return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
+    }
     //查询单个视频
     @PostMapping("/videosFind")
     public Result findVideos(@RequestParam(value="id") Integer id){

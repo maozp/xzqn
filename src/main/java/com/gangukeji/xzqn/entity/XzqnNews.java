@@ -19,7 +19,7 @@ public class XzqnNews {
     private Integer id;
     @Column
     private String newsTitle;
-    @Column
+    @Column(name = "news_date")
     private Date newsDate;
     @Column(name = "news_content",columnDefinition = "TEXT")
     private String newsContent;
@@ -43,4 +43,6 @@ public class XzqnNews {
     private Integer isLike;
     @Column
     private Date likeTime;
+    @Column
+    private Integer newsType;
 }

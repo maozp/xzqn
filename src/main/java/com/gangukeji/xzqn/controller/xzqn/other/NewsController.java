@@ -9,6 +9,10 @@ import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,8 +39,11 @@ public class NewsController {
 
     //查看资讯列表
     @PostMapping("/newsFindAll")
-    public Result findAllNews(){
-        return ResultUtils.success(200,"查看资讯列表成功",newsDao.findAllOrderByNewsDate());
+    public Result findAllNews(@RequestParam("page") int page) throws  Exception {
+        Sort sort = new Sort(Sort.Direction.DESC, "newsDate");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnNews> news = newsDao.findAll(pageable);
+        return ResultUtils.success(200,"查看资讯列表成功",news);
     }
     //查询资讯详情
     @PostMapping("/newsFind")

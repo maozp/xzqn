@@ -303,6 +303,8 @@ public class AuthSignController {
             authSign.setSignTotalDays(authSign.getSignTotalDays()+1);
             authSign.setSignLackDays(authSign.getSignLackDays()-1);
             authSignDao.save(authSign);
+//            HashMap<Object, Object> map = new HashMap<>();
+//            map.put("userId", userId);
             return ResultUtils.success(200,"补签成功",authSignLogDao.findAllByDays(authSignLog.getUserId()));
         }else {
             return ResultUtils.error(0,"尚未获得补签卡");
