@@ -32,4 +32,16 @@ public class XzqnServiceVideos {
     private Date videodate;
     @Column(name = "video_addr")
     private String videoaddr;
+    @Column
+    private Integer isCollect;
+    @Column
+    private Date collectTime;
+    @Column
+    private Integer isLike;
+    @Column
+    private Date likeTime;
+    @Column
+    private Integer LikeNums;
+    @Column
+    private String videoImg;
 }

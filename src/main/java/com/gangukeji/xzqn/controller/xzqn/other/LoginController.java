@@ -198,4 +198,86 @@ public class LoginController {
         return userDao.save(user);
     }
 
+    /**
+     * 登录 3
+     */
+    @PostMapping("user/login2")
+    public Result login3(@RequestBody String data) {
+        //将Json字符串转换成JsonObject对象：
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        XzqnUser user;
+        String openid = null;
+        try {
+            String code = jsonObject.get("code").getAsString();
+            openid = getOpenid(code);
+            user = userDao.findByOpenid(openid);
+            if (user == null) {
+                return ResultUtils.success(200, "数据库没有,创建新用户", initUser2(openid, null, null));
+            }
+            return ResultUtils.success(200, "登录成功", user);
+        } catch (Exception e) {
+            System.out.println(e + "3eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            return ResultUtils.error(-1, "code异常或数据库异常" + e.getMessage());
+        }
+    }
+
+    private XzqnUser initUser2(String openid, String username, String password) {
+        //设置 发单 接单 用户参数
+        XzqnUserReceive receive = new XzqnUserReceive();
+        XzqnUserSend send = new XzqnUserSend();
+        receive.setIsAuth(false);
+        receive.setIsGuarantee(false);
+        receive.setIsBan(false);
+        receive.setAuthType("未认证");
+        receive.setCompanyName("赣谷科技");
+        receive.setNickname("小正青年");
+        receive.setName("小正青年");
+        receive.setIntroduceIds("3,5");
+        receive.setIntroduce("视频监控@");
+        receive.setAddrDes("南昌");
+        receive.setArea("南昌");
+        receive.setAddrName("南昌");
+        receive.setLocation("南昌");
+        receive.setEnterArea("南昌");
+        receive.setMark("小正青年大有可为");
+        receive.setDes("新手上路");
+        receive.setGoodAt("擅长维修各种监控设备");
+        receive.setPromise("售后30天保修");
+        receive.setHeadImg("https://www.xiaozheng8.com/file/1559396271977395978.png");
+        receive.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        receive.setLat(new BigDecimal(29.545380));
+        receive.setLng(new BigDecimal(115.944220));
+        receive.setTurnover90(new BigDecimal(0));
+        receive.setServeTime(new BigDecimal(0));
+        receive.setBackPercentage(new BigDecimal(0));
+        receive.setStarts(0);
+        receive.setBadCount(0);
+        receive.setGoodCount(0);
+        receive.setComplaintCount(0);
+        receive.setServeCount(0);
+        receive.setRate(0);
+
+        send.setIsVip(false);
+        send.setMark("小正青年大有可为");
+        send.setNickname("小正青年");
+        send.setName("小正青年");
+        send.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        send.setCompanyName("赣谷科技");
+        send.setCompanyAddr("金沙大道");
+        send.setDepartmentName("人力资源部");
+        send.setIsCheck(0);
+        send.setHeadImg("https://www.xiaozheng8.com/file/1559617531395582138.JPEG");
+        //保存
+        //设置基本用户参数
+        XzqnUser user = new XzqnUser();
+        user.setReceiveUserId(userReceiveDao.save(receive).getId());
+        user.setSendUserId(userSendDao.save(send).getId());
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setOpenid(openid);
+        //保存
+        return userDao.save(user);
+    }
+
+
 }

@@ -52,6 +52,10 @@ public class TimeController {
                 int orderId = jsonObject.get("orderId").getAsInt();
                 Date time = orderDao.getCreateTimeById(orderId);
                 pass = (System.currentTimeMillis() - time.getTime()) / 1000;
+                if(pass>1296000){
+                    cancelPublish(data);
+                    return ResultUtils.success(200, "取消成功", data);
+                }
             } catch (Exception ex) {
                 System.out.println(e.getMessage());
                 return ResultUtils.error(-1, "给个正确的publishId或者orderId我才能帮你算时间" + ex.getMessage());
@@ -74,5 +78,17 @@ public class TimeController {
         XzqnGrabRecord grabRecord = grabRecordDao.findByPublishIdAndUserId(publishId, userId);
         Date time = grabRecord.getCreateTime();
         return ResultUtils.success(200, "grabTime",(System.currentTimeMillis() - time.getTime()) / 1000 );
+    }
+
+    /**
+     * 取消下单
+     *
+     * @param data
+     */
+    private void cancelPublish(String data) {
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        int publishId = jsonObject.get("publishId").getAsInt();
+        publishDao.updateIsCancelAndStatus(publishId, 100);
+
     }
 }

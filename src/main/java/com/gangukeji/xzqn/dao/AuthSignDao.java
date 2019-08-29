@@ -19,4 +19,10 @@ public interface AuthSignDao extends JpaRepository<XzqnAuthSign,Integer> {
     @Modifying
     @Query("update XzqnAuthSign set signStatus=0  where id =?1")
     int updateAuthSignStatus(Integer id);
+
+    //添加补签卡
+    //UPDATE xzqn_auth_sign set sign_card =sign_card+1  WHERE receive_user_id=5
+    @Modifying
+    @Query("UPDATE XzqnAuthSign n set n.signCard =n.signCard+1  WHERE n.receiveUserId=?1")
+    Integer addSignCard(Integer receiveUserId);
 }

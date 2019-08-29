@@ -16,4 +16,8 @@ public class WXPayConfig {
     //商城小程序
     public final static String appid2= "wxe51527b1b707671e";
     public final static String secret2 = "3c6214ef5a749da47c09c270467a2cb9";
+
+    //APP
+    public final static String appid3= "wx447195be5c084757";
+    public final static String secret3 = "e65e14d332710ad2e622e2e836c3eb4c";
 }

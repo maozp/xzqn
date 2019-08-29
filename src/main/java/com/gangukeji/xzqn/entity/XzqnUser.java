@@ -3,6 +3,9 @@ package com.gangukeji.xzqn.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gangukeji.xzqn.core.BaseEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -16,7 +19,10 @@ import java.util.Date;
 *@Description xzqn_user实体类
 */
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
+@Data
 @Table(name = "xzqn_user")
 @ToString
 public class XzqnUser extends BaseEntity implements Serializable{
