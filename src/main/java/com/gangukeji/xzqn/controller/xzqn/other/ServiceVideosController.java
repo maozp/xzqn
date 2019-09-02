@@ -7,6 +7,7 @@ import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -108,7 +109,8 @@ public class ServiceVideosController {
 
     //查询所有视频
     @PostMapping("/videosFindAll")
-    public Result findAllVideos(@RequestParam("page") int page){
+    public Result findAllVideos(@RequestBody String data) throws  Exception {
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "videodate");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
@@ -116,7 +118,8 @@ public class ServiceVideosController {
     }
     //根据人气查询所有视频
     @PostMapping("/videosReadFindAll")
-    public Result findAllVideosRead(@RequestParam("page") int page){
+    public Result findAllVideosRead(@RequestBody String data) throws  Exception {
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "videoReadNums");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
@@ -124,15 +127,17 @@ public class ServiceVideosController {
     }
     //查询单个视频
     @PostMapping("/videosFind")
-    public Result findVideos(@RequestParam(value="id") Integer id){
+    public Result findVideos(@RequestBody String data){
+        Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
         return ResultUtils.success(200,"查询视频成功",serviceVideosDao.findById(id));
     }
 
 
     //收藏视频接口
     @PostMapping("/collectVideo")
-    public Result collectVideos(@RequestParam(value="id") Integer videoId) throws Exception{
-        XzqnServiceVideos videos=serviceVideosDao.findById(videoId).get();
+    public Result collectVideos(@RequestBody String data) throws Exception{
+        Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
+        XzqnServiceVideos videos=serviceVideosDao.findById(id).get();
         if(videos.getIsCollect()==0){
             videos.setIsCollect(1);
             videos.setCollectTime(now);
@@ -147,8 +152,9 @@ public class ServiceVideosController {
     }
     //点赞视频接口
     @PostMapping("/likeVideo")
-    public Result likeVideos(@RequestParam(value="id") Integer videoId) throws Exception{
-        XzqnServiceVideos videos=serviceVideosDao.findById(videoId).get();
+    public Result likeVideos(@RequestBody String data) throws Exception{
+        Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
+        XzqnServiceVideos videos=serviceVideosDao.findById(id).get();
         if(videos.getIsLike()==0){
             videos.setIsLike(1);
             videos.setLikeTime(now);

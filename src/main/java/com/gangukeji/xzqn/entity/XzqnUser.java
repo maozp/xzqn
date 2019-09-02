@@ -51,6 +51,11 @@ public class XzqnUser extends BaseEntity implements Serializable{
 	@Column
 	//openid
 	private String openid;
+	@Column
+	private String userPhone;
+	@Column
+	//openid
+	private String unionid;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

@@ -13,9 +13,9 @@ public class WXPayConfig {
     public final static String secret = "7be2e324d34efc5d65f4635f6d90d315";//7be2e324d34efc5d65f4635f6d90d315
     public final static String notifyUrl = "https://www.xiaozheng8.com/shop/pay/back";//xzqn
 
-    //商城小程序
+    //小正鱼塘小程序
     public final static String appid2= "wxe51527b1b707671e";
-    public final static String secret2 = "3c6214ef5a749da47c09c270467a2cb9";
+    public final static String secret2 = "c663e770829cd235ecb7aea0803007b6";
 
     //APP
     public final static String appid3= "wx447195be5c084757";

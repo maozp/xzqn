@@ -46,115 +46,116 @@ public class AuthSignController {
 
     Gson gson = (new GsonBuilder()).setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
+//    /**
+//     * 签到
+//     * @param data
+//     * @param
+//     * @return
+//     * @throws Exception
+//     */
+//    @PostMapping("/sign")
+//    public Result doSign(@RequestBody String data) throws Exception{
+//        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
+//        //判断用户是否是第一次签到 判断数据库用户id
+//        if(authSignDao.findXzqnAuthSignByAndUserId(userId)==null){
+//            XzqnAuthSign authSign = gson.fromJson(data, XzqnAuthSign.class);
+//            System.out.println("师傅第一次签到");
+//            authSign.setUserId(userId);
+//            Integer receiveUserId = userDao.getReceiveUserIdByUserId(userId);
+//            authSign.setReceiveUserId(receiveUserId);
+//            authSign.setSignTime(now);
+//            authSign.setSignLastTime(now);
+//            authSign.setSignPoint(1);
+//            //authSign.setSignContinueDays(1);
+//            authSign.setSignTotalDays(1);
+//            authSign.setIsSign(1);
+//            authSign.setSignLackDays(0);
+//            authSign.setSignCard(0);
+//            authSignDao.save(authSign);
+//
+//            XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
+//            authSignLog.setSignTime(now);
+//            authSignLog.setIsSign(1);
+//            //authSignLog.setSignContinueDays(1);
+//            authSignLog.setSignPoint(1);
+//            authSignLog.setSignContent("签到奖励");
+//            authSignLog.setUserId(authSign.getUserId());
+//            authSignLogDao.save(authSignLog);
+//            return ResultUtils.success(200, "签到成功", authSign);
+//        }
+//        XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(userId);
+//        XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
+//        Date now = new Date();
+//        if (authSign != null) {
+//            if(authSign.getSignLastTime().getTime()>getStartOfDay(now).getTime()&&
+//            authSign.getSignLastTime().getTime()<getEndOfDay(now).getTime()){
+//                System.out.println("用户今天已经签到过了，正常使用");
+//                return ResultUtils.error(200,"用户已经签到了");
+//            }
+//            //判断昨天是否签到过
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(now);
+//            calendar.add(Calendar.DATE, -1);
+//            if(authSign.getSignLastTime().getTime()< getStartOfDay(calendar.getTime()).getTime()){
+//                System.out.println("昨天没有连续签到");
+//                //authSign.setSignContinueDays(0);
+//                authSign.setSignLastTime(now);
+//                authSign.setSignPoint(authSign.getSignPoint()+3);
+//                //authSign.setSignContinueDays(authSignLogDao.selectContinueDays(userId)+1);
+//                authSign.setSignTotalDays(authSign.getSignTotalDays()+ 1);
+//                authSign.setIsSign(1);
+//                calendar.setTime(now);
+//                int day1=calendar.get(Calendar.DAY_OF_YEAR);
+//                calendar.setTime(authSign.getSignTime());
+//                int day2=calendar.get(Calendar.DAY_OF_YEAR);
+//                int day=day1-day2+2;
+//                authSign.setSignLackDays(day-authSign.getSignTotalDays());
+//                authSignDao.save(authSign);
+//
+//                //authSignLog.setSignContinueDays(0);
+//                authSignLog.setSignContent("签到奖励");
+//                authSign.setSignPoint(authSign.getSignPoint()-2);
+//            }
+//
+//            authSign.setSignLastTime(now);
+//            authSign.setSignPoint(authSign.getSignPoint()+3);
+//            //authSign.setSignContinueDays(authSignLogDao.selectContinueDays(userId)+1);
+//            authSign.setSignTotalDays(authSign.getSignTotalDays()+ 1);
+//            authSign.setIsSign(1);
+//
+//            calendar.setTime(now);
+//            int day1=calendar.get(Calendar.DAY_OF_YEAR);
+//            calendar.setTime(authSign.getSignTime());
+//            int day2=calendar.get(Calendar.DAY_OF_YEAR);
+//            int day=day1-day2+2;
+//            authSign.setSignLackDays(day-authSign.getSignTotalDays());
+//            authSignDao.save(authSign);
+//
+//            authSignLog.setSignTime(now);
+//            authSignLog.setIsSign(1);
+//            //authSignLog.setSignContinueDays(authSignLogDao.selectContinueDays(userId));
+//            authSignLog.setUserId(authSign.getUserId());
+//            authSignLog.setSignContent("连续签到奖励");
+//            authSignLogDao.save(authSignLog);
+////            Integer authId = authSignDao.save(authSign).getId();
+////            HashMap<Object, Object> map = new HashMap<>();
+////            map.put("id", authId);
+//            return ResultUtils.success(200, "签到成功",authSign);
+//        }
+//        return ResultUtils.success();
+//    }
+
     /**
      * 签到
      * @param data
-     * @param userId
-     * @return
-     * @throws Exception
-     */
-    @PostMapping("/sign")
-    public Result doSign(@RequestBody String data,@RequestParam Integer userId) throws Exception{
-
-        //判断用户是否是第一次签到 判断数据库用户id
-        if(authSignDao.findXzqnAuthSignByAndUserId(userId)==null){
-            XzqnAuthSign authSign = gson.fromJson(data, XzqnAuthSign.class);
-            System.out.println("师傅第一次签到");
-            authSign.setUserId(userId);
-            Integer receiveUserId = userDao.getReceiveUserIdByUserId(userId);
-            authSign.setReceiveUserId(receiveUserId);
-            authSign.setSignTime(now);
-            authSign.setSignLastTime(now);
-            authSign.setSignPoint(1);
-            //authSign.setSignContinueDays(1);
-            authSign.setSignTotalDays(1);
-            authSign.setIsSign(1);
-            authSign.setSignLackDays(0);
-            authSign.setSignCard(0);
-            authSignDao.save(authSign);
-
-            XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
-            authSignLog.setSignTime(now);
-            authSignLog.setIsSign(1);
-            //authSignLog.setSignContinueDays(1);
-            authSignLog.setSignPoint(1);
-            authSignLog.setSignContent("签到奖励");
-            authSignLog.setUserId(authSign.getUserId());
-            authSignLogDao.save(authSignLog);
-            return ResultUtils.success(200, "签到成功", authSign);
-        }
-        XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(userId);
-        XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
-        Date now = new Date();
-        if (authSign != null) {
-            if(authSign.getSignLastTime().getTime()>getStartOfDay(now).getTime()&&
-            authSign.getSignLastTime().getTime()<getEndOfDay(now).getTime()){
-                System.out.println("用户今天已经签到过了，正常使用");
-                return ResultUtils.error(200,"用户已经签到了");
-            }
-            //判断昨天是否签到过
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(now);
-            calendar.add(Calendar.DATE, -1);
-            if(authSign.getSignLastTime().getTime()< getStartOfDay(calendar.getTime()).getTime()){
-                System.out.println("昨天没有连续签到");
-                //authSign.setSignContinueDays(0);
-                authSign.setSignLastTime(now);
-                authSign.setSignPoint(authSign.getSignPoint()+3);
-                //authSign.setSignContinueDays(authSignLogDao.selectContinueDays(userId)+1);
-                authSign.setSignTotalDays(authSign.getSignTotalDays()+ 1);
-                authSign.setIsSign(1);
-                calendar.setTime(now);
-                int day1=calendar.get(Calendar.DAY_OF_YEAR);
-                calendar.setTime(authSign.getSignTime());
-                int day2=calendar.get(Calendar.DAY_OF_YEAR);
-                int day=day1-day2+2;
-                authSign.setSignLackDays(day-authSign.getSignTotalDays());
-                authSignDao.save(authSign);
-
-                //authSignLog.setSignContinueDays(0);
-                authSignLog.setSignContent("签到奖励");
-                authSign.setSignPoint(authSign.getSignPoint()-2);
-            }
-
-            authSign.setSignLastTime(now);
-            authSign.setSignPoint(authSign.getSignPoint()+3);
-            //authSign.setSignContinueDays(authSignLogDao.selectContinueDays(userId)+1);
-            authSign.setSignTotalDays(authSign.getSignTotalDays()+ 1);
-            authSign.setIsSign(1);
-
-            calendar.setTime(now);
-            int day1=calendar.get(Calendar.DAY_OF_YEAR);
-            calendar.setTime(authSign.getSignTime());
-            int day2=calendar.get(Calendar.DAY_OF_YEAR);
-            int day=day1-day2+2;
-            authSign.setSignLackDays(day-authSign.getSignTotalDays());
-            authSignDao.save(authSign);
-
-            authSignLog.setSignTime(now);
-            authSignLog.setIsSign(1);
-            //authSignLog.setSignContinueDays(authSignLogDao.selectContinueDays(userId));
-            authSignLog.setUserId(authSign.getUserId());
-            authSignLog.setSignContent("连续签到奖励");
-            authSignLogDao.save(authSignLog);
-//            Integer authId = authSignDao.save(authSign).getId();
-//            HashMap<Object, Object> map = new HashMap<>();
-//            map.put("id", authId);
-            return ResultUtils.success(200, "签到成功",authSign);
-        }
-        return ResultUtils.success();
-    }
-
-    /**
-     * 签到
-     * @param data
-     * @param userId
+     * @param
      * @return
      * @throws Exception
      */
     @PostMapping("/signV2")
-    public Result doSignV2(@RequestBody String data,@RequestParam Integer userId) throws Exception{
+    public Result doSignV2(@RequestBody String data) throws Exception{
 
+        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
         XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(userId);
         XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
 
@@ -196,10 +197,12 @@ public class AuthSignController {
                 authSign.setSignPoint(authSign.getSignPoint()+1);
                 authSign.setSignLastTime(now);
                 authSign.setSignTotalDays(authSign.getSignTotalDays()+1);
+
                 authSignDao.save(authSign);
 
                 authSignLog.setSignPoint(1);
                 authSignLog.setIsSign(1);
+                authSignLog.setSignTime(now);
                 authSignLog.setSignContent("签到奖励");
                 authSignLogDao.save(authSignLog);
             }else {
@@ -249,8 +252,9 @@ public class AuthSignController {
 
     //查看签到信息
     @PostMapping("/signFind")
-    public Result signView(@RequestBody String data,@RequestParam(value="userId") Integer userId){
+    public Result signView(@RequestBody String data){
 
+        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
         if(authSignDao.findTopByUserIdOrderByIdDesc(userId)==null){
             XzqnAuthSign authSign = gson.fromJson(data, XzqnAuthSign.class);
             authSign.setIsSign(0);
@@ -280,40 +284,64 @@ public class AuthSignController {
             System.out.println("昨天没有连续签到");
             //authSign.setSignContinueDays(0);
         }
+        calendar.setTime(now);
+        int day1=calendar.get(Calendar.DAY_OF_YEAR);
+        calendar.setTime(authSign.getSignTime());
+        int day2=calendar.get(Calendar.DAY_OF_YEAR);
+        int day=day1-day2+1;
+        authSign.setSignLackDays(day-authSign.getSignTotalDays());
         authSignDao.save(authSign);
+
         return ResultUtils.success(200, "查找签到信息成功", authSign);
     }
 
     //查看补签弹框日期
     @PostMapping("/findSignDate")
-    public Result findDate(@RequestParam(value="userId") Integer userId)throws Exception{
-        return ResultUtils.success(200,"查看已签到日期",authSignLogDao.findAllByDays(userId));
+    public Result findDate(@RequestBody String data)throws Exception{
+        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
+        String date=new JsonParser().parse(data).getAsJsonObject().get("date").getAsString();
+        return ResultUtils.success(200,"查看已签到日期",authSignLogDao.findBySignTime(userId,date));
     }
     //补签接口
     @PostMapping("replacementDate")
-    public Result replacement(@RequestBody String data,@RequestParam(value="userId") Integer userId)throws Exception{
+    public Result replacement(@RequestBody String data)throws Exception{
         XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
-        XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(userId);
-        if(authSign.getSignCard()>=1){
-            authSignLog.setIsSign(1);
-            authSignLog.setSignPoint(2);
-            authSignLog.setSignContent("补签积分");
-            authSignLogDao.save(authSignLog);
-            authSign.setSignCard(authSign.getSignCard()-1);
-            authSign.setSignTotalDays(authSign.getSignTotalDays()+1);
-            authSign.setSignLackDays(authSign.getSignLackDays()-1);
-            authSignDao.save(authSign);
+        XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(authSignLog.getUserId());
+
+        System.out.println(authSignLog.getSignTime().toString());
+        //最后签到时间15天之前
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.add(Calendar.DATE, -15);
+        if(getStartOfDay(authSignLog.getSignTime()).getTime() > getStartOfDay(calendar.getTime()).getTime() && getStartOfDay(authSignLog.getSignTime()).getTime()<getStartOfDay(now).getTime()
+                &&getStartOfDay(authSignLog.getSignTime()).getTime()>getStartOfDay(authSign.getSignTime()).getTime()
+        ){
+            if(authSign.getSignCard()>=1 ){
+                authSignLog.setIsSign(1);
+                authSignLog.setSignPoint(2);
+                authSignLog.setSignContent("补签积分");
+                authSignLogDao.save(authSignLog);
+                authSign.setSignCard(authSign.getSignCard()-1);
+                authSign.setSignPoint(authSign.getSignPoint()+2);
+                authSign.setSignTotalDays(authSign.getSignTotalDays()+1);
+                if(authSign.getSignLackDays()>0){
+                    authSign.setSignLackDays(authSign.getSignLackDays()-1);
+                }
+                authSignDao.save(authSign);
 //            HashMap<Object, Object> map = new HashMap<>();
 //            map.put("userId", userId);
-            return ResultUtils.success(200,"补签成功",authSignLogDao.findAllByDays(authSignLog.getUserId()));
-        }else {
-            return ResultUtils.error(0,"尚未获得补签卡");
+                return ResultUtils.success(200,"补签成功",authSignLog.getSignTime());
+            }else {
+                return ResultUtils.error(0,"尚未获得补签卡");
+            }
         }
+        return ResultUtils.error(0,"补签失败，只能补签前15天的日期|补签日期不能大于首次签到日期");
 
     }
     //查看积分明细
     @PostMapping("/signPoint")
-    public Result signPoint(@RequestParam(value="userId") Integer userId)throws Exception {
+    public Result signPoint(@RequestBody String data)throws Exception {
+        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
         if(authSignDao.findTopByUserIdOrderByIdDesc(userId)==null){
             return ResultUtils.success(200,"积分明细为空","");
         }
@@ -321,7 +349,8 @@ public class AuthSignController {
     }
     //查看连续签到天数
     @PostMapping("/continueDays")
-    public Result ContinueDays(@RequestParam(value="userId") Integer userId)throws Exception{
+    public Result ContinueDays(@RequestBody String data)throws Exception{
+        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
         if(authSignDao.findTopByUserIdOrderByIdDesc(userId)==null){
             return ResultUtils.success(200,"查看连续签到天数",0);
         }else{

@@ -22,6 +22,8 @@ public interface UserDao extends JpaRepository<XzqnUser, Integer> {
 
     XzqnUser findByUsername(String username);
 
+    XzqnUser findByUserPhone(String userphone);
+
     Boolean existsByUsername(String username);
 
     XzqnUser findByReceiveUserId(Integer i);
@@ -32,7 +34,7 @@ public interface UserDao extends JpaRepository<XzqnUser, Integer> {
 
     //    XzqnUser findFirstByOpenidOrderByIdDesc(String openid);
     XzqnUser findByOpenid(String openId);
-
+    XzqnUser findByUnionid(String unionId);
     /**
      * 获取sendUserId
      */

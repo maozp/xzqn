@@ -9,6 +9,7 @@ import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Date;
+
 
 /**
  *  资讯接口
@@ -39,7 +41,8 @@ public class NewsController {
 
     //查看资讯列表
     @PostMapping("/newsFindAll")
-    public Result findAllNews(@RequestParam("page") int page) throws  Exception {
+    public Result findAllNews(@RequestBody String data) throws  Exception {
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "newsDate");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnNews> news = newsDao.findAll(pageable);
@@ -47,9 +50,19 @@ public class NewsController {
     }
     //查询资讯详情
     @PostMapping("/newsFind")
-    public Result findNews(@RequestParam(value="id") Integer id){
+    public Result findNews(@RequestBody String data){
+        Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
         return ResultUtils.success(200,"查询资讯成功",newsDao.findById(id));
     }
+
+    //分享资讯详情
+    @PostMapping("/newsShore")
+    public Result findShore(@RequestBody String data){
+        Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
+        return ResultUtils.success(200,"分享成功","https://www.xiaozheng8.com/newsFind?id="+id);
+    }
+
+
     //查询收藏的资讯
     @PostMapping("/newsCollectFind")
     public Result findCollectNews(){
@@ -57,7 +70,8 @@ public class NewsController {
     }
     //收藏资讯接口
     @PostMapping("/collectNews")
-    public Result collectNews(@RequestParam(value="id") Integer newsId) throws Exception{
+    public Result collectNews(@RequestBody String data) throws Exception{
+        Integer newsId = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
         XzqnNews news=newsDao.findById(newsId).get();
         if(news.getIsCollect()==0){
             news.setIsCollect(1);
@@ -74,7 +88,8 @@ public class NewsController {
 
     //点赞资讯接口
     @PostMapping("/likeNew")
-    public Result likeNews(@RequestParam(value="id") Integer NewId) throws Exception{
+    public Result likeNews(@RequestBody String data) throws Exception{
+        Integer NewId = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
         XzqnNews News=newsDao.findById(NewId).get();
         if(News.getIsLike()==0){
             News.setIsLike(1);

@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public interface SmsDao extends JpaRepository<XzqnSms, Integer> {
     XzqnSms getDistinctTopByPhone(String phone);
     XzqnSms getDistinctTopByPhoneOrderByIdDesc(String phone);
     int deleteByPhone(String phone);
+    @Query("select code from XzqnSms where phone=?1 ")
+    Integer findByPhoneAndCode(String phone);
+    XzqnSms findByPhone(String phone);
 
     int deleteByCreateTimeBefore(Date time);
 }

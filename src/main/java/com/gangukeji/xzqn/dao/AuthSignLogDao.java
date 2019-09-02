@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import sun.awt.SunHints;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -26,5 +27,7 @@ public interface AuthSignLogDao extends JpaRepository<XzqnAuthSignLog,Integer> {
     @Query(value = "SELECT n FROM XzqnAuthSignLog n WHERE n.userId=?1 ORDER BY n.signTime DESC")
     List<XzqnAuthSignLog> findAllByDays(Integer userId);
 
-
+    //select * from xzqn_auth_sign_log t where date_format(sign_time,'%Y-%m')='2019-08' AND user_id=11122 ORDER BY sign_time ASC
+    @Query(value = "select * from xzqn_auth_sign_log t where date_format(sign_time,'%Y-%m')=?2 AND user_id=?1 ORDER BY sign_time ASC",nativeQuery = true)
+    List<XzqnAuthSignLog> findBySignTime(Integer userId,String date);
 }

@@ -61,7 +61,10 @@ public class LoginController {
     UserReceiveDao userReceiveDao;
     @Resource
     UserSendDao userSendDao;
+    @Resource
+    SmsDao smsDao;
 
+    //小程序
     private final static String appid = WXPayConfig.appid;
     //appsecret
     private final static String secret = WXPayConfig.secret;
@@ -70,9 +73,21 @@ public class LoginController {
     private final static String notifyUrl = WXPayConfig.notifyUrl;
 //    private final static String spbillCreateIp = "47.111.171.242";
 
+    //APP
+    private final static String appid3 = WXPayConfig.appid3;
+    //appsecret
+    private final static String secret3 = WXPayConfig.secret3;
+
+   //小程序微信授权登录
     public String getOpenid(String code) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         return new JsonParser().parse(Objects.requireNonNull(restTemplate.getForEntity("https://api.weixin.qq.com/sns/jscode2session?appid=" + appid + "&secret=" + secret + "&js_code=" + code + "&grant_type=authorization_code", String.class).getBody())).getAsJsonObject().get("openid").getAsString();
+    }
+    //APP授权登录
+    //https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+    public String getOpenid2(String code) throws Exception {
+        RestTemplate restTemplate = new RestTemplate();
+        return new JsonParser().parse(Objects.requireNonNull(restTemplate.getForEntity("https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + appid3 + "&secret=" + secret3 + "&js_code=" + code + "&grant_type=authorization_code", String.class).getBody())).getAsJsonObject().get("openid").getAsString();
     }
 
     @PostMapping("app/user/login")
@@ -115,6 +130,121 @@ public class LoginController {
         HashMap<Object, Object> map = new HashMap<>();
         map.put("userId", userId);
         return ResultUtils.success(200, "注册成功", map);
+    }
+
+    //手机注册
+    @PostMapping("app/phone/register")
+    @Log
+    public Result registerPhoneApp(@RequestBody String data) {
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        Integer userId;
+        try {
+            String userPhone = jsonObject.get("userPhone").getAsString();
+            //判断手机号是否已存在
+            XzqnUser user = userDao.findByUserPhone(userPhone);
+            if (user != null) {
+                return ResultUtils.error(-1, "手机号已存在");
+            }
+            Integer code = smsDao.findByPhoneAndCode(userPhone);
+            Integer inputCode=jsonObject.get("inputCode").getAsInt();
+            if(!code.equals(inputCode)){
+                return ResultUtils.error(-1, "验证码不正确");
+            }
+            userId = initUser3("", userPhone).getId();
+        } catch (Exception e) {
+            System.out.printf("25eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee注册异常" + e.getMessage());
+           return ResultUtils.error(-1, "注册异常");
+       }
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        return ResultUtils.success(200, "注册成功", map);
+    }
+    //手机登陆
+    @PostMapping("app/phone/login")
+    @Log
+    public Result loginApp2(@RequestBody String data) {
+        //将Json字符串转换成JsonObject对象：
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        Integer userId;
+        try {
+            String userPhone = jsonObject.get("userPhone").getAsString();
+            //判断手机号是否已存在
+            XzqnUser user = userDao.findByUserPhone(userPhone);
+            if (user == null) {
+                return ResultUtils.error(-1, "用户不存在");
+            }
+            Integer code = smsDao.findByPhoneAndCode(userPhone);
+            Integer inputCode=jsonObject.get("inputCode").getAsInt();
+            if(!code.equals(inputCode)){
+                return ResultUtils.error(-1, "验证码不正确");
+            }
+            userId = userDao.findByUserPhone(userPhone).getId();
+        } catch (Exception e) {
+            System.out.printf("25eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee登录异常" + e.getMessage());
+            return ResultUtils.error(-1, "登录异常");
+        }
+        HashMap<Object, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        return ResultUtils.success(200, "登录成功", map);
+    }
+
+    private XzqnUser initUser3(String openid, String userPhone) {
+        //设置 发单 接单 用户参数
+        XzqnUserReceive receive = new XzqnUserReceive();
+        XzqnUserSend send = new XzqnUserSend();
+        receive.setIsAuth(false);
+        receive.setIsGuarantee(false);
+        receive.setIsBan(false);
+        receive.setAuthType("未认证");
+        receive.setCompanyName("赣谷科技");
+        receive.setNickname("小正青年");
+        receive.setName("小正青年");
+        receive.setIntroduceIds("3,5");
+        receive.setIntroduce("视频监控@");
+        receive.setAddrDes("南昌");
+        receive.setArea("南昌");
+        receive.setAddrName("南昌");
+        receive.setLocation("南昌");
+        receive.setEnterArea("南昌");
+        receive.setMark("小正青年大有可为");
+        receive.setDes("新手上路");
+        receive.setGoodAt("擅长维修各种监控设备");
+        receive.setPromise("售后30天保修");
+        receive.setHeadImg("https://www.xiaozheng8.com/file/1559396271977395978.png");
+        receive.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        receive.setLat(new BigDecimal(29.545380));
+        receive.setLng(new BigDecimal(115.944220));
+        receive.setTurnover90(new BigDecimal(0));
+        receive.setServeTime(new BigDecimal(0));
+        receive.setBackPercentage(new BigDecimal(0));
+        receive.setStarts(0);
+        receive.setBadCount(0);
+        receive.setGoodCount(0);
+        receive.setComplaintCount(0);
+        receive.setServeCount(0);
+        receive.setRate(0);
+
+        send.setIsVip(false);
+        send.setMark("小正青年大有可为");
+        send.setNickname("小正青年");
+        send.setName("小正青年");
+        send.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        send.setCompanyName("赣谷科技");
+        send.setCompanyAddr("金沙大道");
+        send.setDepartmentName("人力资源部");
+        send.setIsCheck(0);
+        send.setHeadImg("https://www.xiaozheng8.com/file/1559617531395582138.JPEG");
+        //保存
+        //设置基本用户参数
+        XzqnUser user = new XzqnUser();
+        user.setReceiveUserId(userReceiveDao.save(receive).getId());
+        user.setSendUserId(userSendDao.save(send).getId());
+        user.setUsername(null);
+        user.setPassword(null);
+        user.setUserPhone(userPhone);
+        user.setOpenid(openid);
+        //保存
+        return userDao.save(user);
     }
 
     /**
@@ -201,18 +331,18 @@ public class LoginController {
     /**
      * 登录 3
      */
-    @PostMapping("user/login2")
+    @PostMapping("user/wxapp/login")
     public Result login3(@RequestBody String data) {
         //将Json字符串转换成JsonObject对象：
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         XzqnUser user;
-        String openid = null;
+
         try {
-            String code = jsonObject.get("code").getAsString();
-            openid = getOpenid(code);
-            user = userDao.findByOpenid(openid);
+            String openid = jsonObject.get("openid").getAsString();
+            String unionid= jsonObject.get("unionid").getAsString();
+            user = userDao.findByUnionid(unionid);
             if (user == null) {
-                return ResultUtils.success(200, "数据库没有,创建新用户", initUser2(openid, null, null));
+                return ResultUtils.success(200, "数据库没有,创建新用户", initUser2(openid, unionid,null, null));
             }
             return ResultUtils.success(200, "登录成功", user);
         } catch (Exception e) {
@@ -221,7 +351,7 @@ public class LoginController {
         }
     }
 
-    private XzqnUser initUser2(String openid, String username, String password) {
+    private XzqnUser initUser2(String openid,String unionid, String username, String password) {
         //设置 发单 接单 用户参数
         XzqnUserReceive receive = new XzqnUserReceive();
         XzqnUserSend send = new XzqnUserSend();
@@ -275,6 +405,7 @@ public class LoginController {
         user.setUsername(username);
         user.setPassword(password);
         user.setOpenid(openid);
+        user.setOpenid(unionid);
         //保存
         return userDao.save(user);
     }

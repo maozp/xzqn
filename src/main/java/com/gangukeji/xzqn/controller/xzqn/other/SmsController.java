@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -24,12 +25,25 @@ public class SmsController {
     @Autowired
     private SmsDao smsDao;
 
+    Date now=new Date();
     @PostMapping("/sendCode")
     public Result sendCode(@RequestBody Map<String, String> map) throws Exception {
         String phoneNum = map.get("phone");
         String sendCode = SmsUtilAli.send(phoneNum);
-        XzqnSms xzqnSms = smsDao.save(new XzqnSms( phoneNum, sendCode));
-        return ResultUtils.success(200, "发送成功", xzqnSms);
+        XzqnSms xzqnSms=smsDao.findByPhone(phoneNum);
+        if(xzqnSms==null){
+            xzqnSms = smsDao.save(new XzqnSms( phoneNum, sendCode));
+            xzqnSms.setPhone(phoneNum);
+            xzqnSms.setCode(sendCode);
+            xzqnSms.setCreateTime(now);
+            smsDao.save(xzqnSms);
+        }else{
+            xzqnSms.setCode(sendCode);
+            xzqnSms.setCreateTime(now);
+            smsDao.save(xzqnSms);
+        }
+
+        return ResultUtils.success(200, "发送成功", "");
     }
 
     @PostMapping("/findCode")
