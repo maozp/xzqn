@@ -165,7 +165,6 @@ public class PCindexController {
         return ResultUtils.success(200,"查询7天折线金额成功",map);
 
     }
-
     //分析用户地区
     @PostMapping("/xzqn/userCity")
     public Result userCity() {
