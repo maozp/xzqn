@@ -15,6 +15,6 @@ public interface NewsDao extends JpaRepository<XzqnNews,Integer> {
     @Query("select n from XzqnNews n ORDER BY n.newsDate DESC ")
     List<XzqnNews> findAllOrderByNewsDate();
 
-    @Query("select n from XzqnNews n where n.isCollect=1 ORDER BY n.collectTime DESC ")
-    List<XzqnNews> findByCollectAndTime();
+//    @Query("select n from XzqnNews n where n.isCollect=1 ORDER BY n.collectTime DESC ")
+//    List<XzqnNews> findByCollectAndTime();
 }

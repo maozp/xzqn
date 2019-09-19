@@ -18,7 +18,7 @@ spring:
   datasource:
     username: hx
     password: hx123456
-    url: jdbc:mysql://localhost:3306/xzqn_dev3?characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/xzqn_dev3?characterEncoding=utf8&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
   application:
     name: 小镇青年开发中
   servlet:

@@ -2,6 +2,10 @@ package com.gangukeji.xzqn.controller.xzqn.other;
 
 
 import com.gangukeji.xzqn.serviceImpl.WXserviceImpl;
+import com.gangukeji.xzqn.utils.Result;
+import com.gangukeji.xzqn.utils.ResultUtils;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +25,11 @@ public class WXController {
     private WXserviceImpl wxPayService;
 
     @PostMapping("/apppay")
-    public Map wxAdd(@RequestParam(value = "user_id") String user_id, @RequestParam(value = "total_fee") String total_fee
-            , @RequestParam(value = "oid") String oid) throws Exception {
-        return wxPayService.dounifiedOrder(user_id, total_fee, oid);
+    public Result wxAdd(@RequestBody String data) throws Exception {
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        int order_id = jsonObject.get("orderId").getAsInt();
+        String total_fee= jsonObject.get("totalFee").getAsString();
+        return ResultUtils.success(200,"调取微信支付成功",wxPayService.dounifiedOrder(order_id, total_fee));
     }
 
 

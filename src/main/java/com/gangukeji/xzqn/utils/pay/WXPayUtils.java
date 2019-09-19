@@ -113,6 +113,56 @@ public class WXPayUtils {
                 + "<sign>" + mapToSign + "</sign>"
                 + "</xml>";
     }
+    /**
+     * 微信支付要求map排好序,然后转xml
+     * @param openid
+     * @param total_fee
+     * @param spbill_create_ip
+     * @param orderNo
+     * @param nonce_str
+     * @param body
+     * @param packageParams
+     * @return
+     */
+    public static SortedMap<String, String> initMap2(String openid, String total_fee, String spbill_create_ip, String orderNo, String nonce_str, String body, SortedMap<String, String> packageParams) {
+        packageParams.put("appid", WXPayConfig.appid2);
+        packageParams.put("mch_id", WXPayConfig.mchId);
+//            packageParams.put("sign_type", "MD5");
+        packageParams.put("nonce_str", nonce_str);
+        packageParams.put("body", body);
+        packageParams.put("out_trade_no", orderNo);//商户订单号
+        packageParams.put("total_fee", total_fee);//支付金额，这边需要转成字符串类型，否则后面的签名会失败
+        packageParams.put("spbill_create_ip", spbill_create_ip);
+        packageParams.put("notify_url", WXPayConfig.notifyUrl);
+        packageParams.put("trade_type", "JSAPI");
+        packageParams.put("openid", openid);
+        return packageParams;
+    }
+    /**
+     * 构造xml用于统一下单
+     * @param openid
+     * @param total_fee
+     * @param spbill_create_ip
+     * @param orderNo
+     * @param nonce_str
+     * @param body
+     * @param mapToSign
+     * @return
+     */
+    public static String getXML2(String openid, String total_fee, String spbill_create_ip, String orderNo, String nonce_str, String body, String mapToSign) {
+        return "<xml>" + "<appid>" + WXPayConfig.appid2 + "</appid>"
+                + "<body><![CDATA[" + body + "]]></body>"
+                + "<mch_id>" + WXPayConfig.mchId + "</mch_id>"
+                + "<nonce_str>" + nonce_str + "</nonce_str>"
+                + "<notify_url>" + WXPayConfig.notifyUrl + "</notify_url>"
+                + "<openid>" + openid + "</openid>"
+                + "<out_trade_no>" + orderNo + "</out_trade_no>"
+                + "<spbill_create_ip>" + spbill_create_ip + "</spbill_create_ip>"
+                + "<total_fee>" + total_fee + "</total_fee>"
+                + "<trade_type>" + "JSAPI" + "</trade_type>"
+                + "<sign>" + mapToSign + "</sign>"
+                + "</xml>";
+    }
 
     /**
      * 签名构造,需要两次签名

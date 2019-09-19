@@ -49,13 +49,24 @@ public class XzqnUser extends BaseEntity implements Serializable{
 	//密码
 	private String password;
 	@Column
-	//openid
 	private String openid;
 	@Column
 	private String userPhone;
 	@Column
-	//openid
+	@JsonIgnore
 	private String unionid;
+	@Column
+	private String rongToken;
+	@Column
+	private String name;
+	@Column
+	private String userHeadImg;
+	@Column
+	private Integer userLevel;
+	@Column
+	private String mark;
+	@Column
+	private String city;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

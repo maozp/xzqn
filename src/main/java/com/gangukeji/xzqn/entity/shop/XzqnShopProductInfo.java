@@ -34,21 +34,20 @@ public class XzqnShopProductInfo {
     private Integer storeCount;
     private Integer payCount;
     private String mark;
-    @JsonIgnore
+
     private String img;
-    @JsonIgnore
+
     private String des;
-    @JsonIgnore
+
     private String pic;
     @Transient
     private String[] picList;
     @Transient
+
     private List imgAndDes;
     @Transient
-    @JsonIgnore
     private String[] desList;
     @Transient
-    @JsonIgnore
     private String[] imgList;
 
     @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)

@@ -3,16 +3,16 @@ package com.gangukeji.xzqn.controller.xzqn.other;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.dao.*;
-import com.gangukeji.xzqn.entity.XzqnAuthContent;
-import com.gangukeji.xzqn.entity.XzqnAuthPerson;
-import com.gangukeji.xzqn.entity.XzqnAuthSkill;
-import com.gangukeji.xzqn.entity.XzqnUserReceive;
+import com.gangukeji.xzqn.entity.*;
 import com.gangukeji.xzqn.entity.view.AuthView;
 import com.gangukeji.xzqn.utils.AuthUtil;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -183,8 +184,18 @@ public class AuthController {
     @PostMapping("auth/skill")
     @Log("添加技能认证")
     public Result authS(@RequestBody String data) {
-        XzqnAuthSkill authSkill = gson.fromJson(data, XzqnAuthSkill.class);
-        Integer userId = authSkill.getUserId();
+
+        //解析多张图片，把多张图片地址数组中间加@成为字符串存入skillCertificate
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.get("skillCertificate").getAsJsonArray();
+        Type type = new TypeToken<List<String>>() {
+        }.getType();
+        List<String> skillCertificate= new Gson().fromJson(jsonArray, type);
+        StringBuilder stringBuilder = new StringBuilder();
+        skillCertificate.forEach(img -> stringBuilder.append(img).append("@"));
+        XzqnAuthSkill authSkill = new XzqnAuthSkill();
+
+        Integer userId = jsonObject.get("userId").getAsInt();
         boolean exists = authSDao.existsByUserId(userId);
         if (exists) {
             authSDao.deleteByUserId(userId);
@@ -192,6 +203,9 @@ public class AuthController {
         int receiveUserId = userDao.getReceiveUserIdByUserId(userId);
         authSkill.setReceiveUserId(receiveUserId);
         authSkill.setIsCheck(1);
+        authSkill.setSkillCertificate(stringBuilder.toString());
+        authSkill.setUserId(userId);
+        //authSkill.setSkillCertificate();
         XzqnAuthSkill save = authSDao.save(authSkill);
         Integer authId = save.getId();
         //设置 receive authSkillId

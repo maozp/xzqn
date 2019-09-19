@@ -17,6 +17,13 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ShopProductInfoDao extends JpaRepository<XzqnShopProductInfo, Integer> {
+
+
+    //select t1.*,t2.cate_name from xzqn_shop_product_info t1,xzqn_shop_cate t2
+    //where t1.cate_id = t2.cate_id;
+    @Query(value = "select t1.*,t2.cate_name from xzqn_shop_product_info t1,xzqn_shop_cate t2 where t1.cate_id = t2.cate_id ",nativeQuery=true)
+    List<Object> findAllandCateName();
+
     Page<XzqnShopProductInfo> findAllByUserId(Integer userId, Pageable pageable);
 
     Page<XzqnShopProductInfo> findAllByCateId(Integer cateId,Pageable pageable);

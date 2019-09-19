@@ -1,26 +1,25 @@
 package com.gangukeji.xzqn.utils.pay;
 
-import com.github.wxpay.sdk.WXPayConfig;
-import org.springframework.util.ClassUtils;
-
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import com.github.wxpay.sdk.WXPayConfig;
+import java.io.File;
+
 
 public class WXConfigUtil implements WXPayConfig {
     private byte[] certData;
-    public static final String APP_ID = "wxe51527b1b707671e"; //app Id
+    public static final String APP_ID = "wx447195be5c084757"; //app Id
     public static final String KEY = "wanbo123456789987654321123456789";//秘钥
     public static final String MCH_ID = "1505384961"; //商户号
 
     public WXConfigUtil() throws Exception {
-        String certPath = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"/weixin/apiclient_cert.p12";//从微信商户平台下载的安全证书存放的路径
-        File file = new File(certPath);
-        InputStream certStream = new FileInputStream(file);
-        this.certData = new byte[(int) file.length()];
-        certStream.read(this.certData);
-        certStream.close();
+//        String certPath = "证书地址";//从微信商户平台下载的安全证书存放的路径
+//        File file = new File(certPath);
+//        InputStream certStream = new FileInputStream(file);
+//        this.certData = new byte[(int) file.length()];
+//        certStream.read(this.certData);
+//        certStream.close();
     }
 
     @Override
@@ -55,4 +54,3 @@ public class WXConfigUtil implements WXPayConfig {
         return 10000;
     }
 }
-

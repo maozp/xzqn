@@ -1,10 +1,13 @@
 package com.gangukeji.xzqn.controller.xzqn.other;
 
+import com.aliyuncs.http.HttpResponse;
 import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.dao.*;
 import com.gangukeji.xzqn.entity.XzqnAuthContent;
+import com.gangukeji.xzqn.entity.XzqnUser;
 import com.gangukeji.xzqn.entity.XzqnUserReceive;
 import com.gangukeji.xzqn.entity.view.Area;
+import com.gangukeji.xzqn.utils.CodeUtil;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.gangukeji.xzqn.utils.StatusUtils2;
@@ -14,6 +17,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +31,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.gangukeji.xzqn.utils.Utils.copyPropertiesIgnoreNull;
@@ -218,4 +231,73 @@ public class UserController {
         List<Area> area = new Gson().fromJson(StatusUtils2.AREA, type);
         return ResultUtils.success(200,"area",area);
     }
+
+    /**
+     * 查看用户信息
+     */
+
+    @PostMapping("user/find")
+    @Log
+    public Result findUser(@RequestBody String data) {
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer userId=jsonObject.get("userId").getAsInt();
+        XzqnUser user = userDao.findById(userId).get();
+        return ResultUtils.success(200, "查看用户信息成功", user);
+    }
+
+    /**
+     * 更新师傅信息by userId
+     */
+    @PostMapping("user/update")
+    @Log
+    public Result updateUser(@RequestBody String data) {
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer userId=jsonObject.get("userId").getAsInt();
+        String headImg=jsonObject.get("headImg").getAsString();
+        String nickName=jsonObject.get("nickName").getAsString();
+        String mark=jsonObject.get("mark").getAsString();
+        XzqnUser user = userDao.findById(userId).get();
+        user.setUserHeadImg(headImg);
+        user.setName(nickName);
+        user.setMark(mark);
+
+        StringBuffer res = new StringBuffer();
+        String url = "http://api-cn.ronghub.com/user/refresh.json";
+        String App_Key = "sfci50a7s3pvi"; //开发者平台分配的 App Key。
+        String App_Secret = "duJHa7WHKnGX";
+        String Timestamp = String.valueOf(System.currentTimeMillis() / 1000);//时间戳，从 1970 年 1 月 1 日 0 点 0 分 0 秒开始到现在的秒数。
+        String Nonce = String.valueOf(Math.floor(Math.random() * 1000000));//随机数，无长度限制。
+        StringBuilder toSign = new StringBuilder(App_Secret).append(Nonce).append(Timestamp);
+        String Signature  = CodeUtil.hexSHA1(toSign.toString());//数据签名。
+        HttpPost httpPost = new HttpPost(url);
+        httpPost.setHeader("App-Key", App_Key);
+        httpPost.setHeader("Timestamp", Timestamp);
+        httpPost.setHeader("Nonce", Nonce);
+        httpPost.setHeader("Signature", Signature );
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        List<BasicNameValuePair> nameValuePair = new ArrayList<>(1);
+        nameValuePair.add(new BasicNameValuePair("userId", userId.toString()));
+        nameValuePair.add(new BasicNameValuePair("name",nickName));
+        nameValuePair.add(new BasicNameValuePair("portraitUri",headImg));
+        HttpResponse httpResponse = null;
+        try {
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePair,"utf-8"));
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse result = httpClient.execute(httpPost);
+            BufferedReader br = new BufferedReader(new InputStreamReader(result.getEntity().getContent()));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                res.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JsonObject object = new JsonParser().parse(res.toString()).getAsJsonObject();
+
+
+        userDao.save(user);
+
+        return ResultUtils.success(200, "更新用户信息成功", user);
+    }
+
 }

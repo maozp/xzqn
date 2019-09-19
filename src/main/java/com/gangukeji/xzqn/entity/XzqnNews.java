@@ -36,13 +36,5 @@ public class XzqnNews {
     @Column
     private String titleThirdImg;
     @Column
-    private Integer isCollect;
-    @Column
-    private Date collectTime;
-    @Column
-    private Integer isLike;
-    @Column
-    private Date likeTime;
-    @Column
     private Integer newsType;
 }

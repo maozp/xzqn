@@ -12,6 +12,13 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface SendUserDao extends JpaRepository<XzqnUserSend, Integer> {
+
+
+    //SELECT COUNT(id) FROM `xzqn_user_send`
+    //发单方人数
+    @Query(value = "SELECT COUNT(id) FROM `xzqn_user_send` where is_check=2",nativeQuery=true)
+    int findBySendNums();
+
     /**
      * 更新客户信息
      */

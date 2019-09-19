@@ -140,6 +140,12 @@ public class SetStatusControllerV3 {
 //            int orderId = jsonObject.get("orderId").getAsInt();
 //            orderDao.updateOrderStatus(STATUS+1, orderId);//支付成功在payBack里面设置
 //            updateLog(STATUS+1, 1, 1, orderId);
+            try {
+                int receiveUserId = jsonObject.get("receiveUserId").getAsInt();
+                authSignDao.addSignCard(receiveUserId);
+            }catch (Exception e){
+
+            }
             return pay(data, request);
         }
         //setPay=true
@@ -160,12 +166,7 @@ public class SetStatusControllerV3 {
 //            updateLog(STATUS + 1, 1, 2, orderId);
 //            return ResultUtils.success(200, "操作成功", STATUS + 1);
 //        }
-        try {
-            int receiveUserId = jsonObject.get("receiveUserId").getAsInt();
-            authSignDao.addSignCard(receiveUserId);
-        }catch (Exception e){
 
-        }
 
         return ResultUtils.error(-1, "订单流程到头了哥们,恭喜通关");
     }

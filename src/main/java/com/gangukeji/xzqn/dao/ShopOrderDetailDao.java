@@ -14,4 +14,5 @@ import java.util.List;
 @Transactional
 public interface ShopOrderDetailDao extends JpaRepository<XzqnShopOrderDetail,Integer> {
     List<XzqnShopOrderDetail> findAllByOrderId(Integer orderId);
+    List<XzqnShopOrderDetail> findAllByOrderDetailId(Integer orderId);
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,8 @@ public class PublishController {
     @Autowired
     ServicePublishDao publishDao;
 
-    @PostMapping("publish/sort/find/{page}")
-    public Result findAll(@PathVariable("page") int page) {
+    @PostMapping("publish/sort/find")
+    public Result findAll(@RequestParam("page") int page) {
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnServicePublish> all = publishDao.findAllByIsCheck1(pageable);

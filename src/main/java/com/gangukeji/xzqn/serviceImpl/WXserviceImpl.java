@@ -19,20 +19,20 @@ public class WXserviceImpl implements WXservice {
     //@Autowired
     //JinOrderMapper jinOrderMapper;
     private static final Logger logger = LoggerFactory.getLogger("MainLogger");
-    public static final String SPBILL_CREATE_IP = ""; //服务器Ip
-    public static final String NOTIFY_URL = ""; //回调地址
-    public static final String TRADE_TYPE_APP = ""; //交易类型
+    public static final String SPBILL_CREATE_IP = "47.111.171.242"; //服务器Ip
+    public static final String NOTIFY_URL = "https://www.xiaozheng8.com/weixin/notify"; //回调地址
+    public static final String TRADE_TYPE_APP = "APP"; //交易类型
 
     /**
      * 调用官方SDK 获取预支付订单等参数
      * 统一下单
-     * @param user_id   用户ID
+     * @param order_id   用户ID
      * @param total_fee 总价
      * @return
      * @throws Exception
      */
     @Override
-    public Map dounifiedOrder(String user_id, String total_fee, String oid) throws Exception {
+    public Map dounifiedOrder(Integer order_id, String total_fee) throws Exception {
         try {
             float cardprice1 = Float.parseFloat(total_fee) * 100;//微信的支付单位是分所以要转换一些单位
             int cardmoney = (int) cardprice1;
@@ -57,7 +57,7 @@ public class WXserviceImpl implements WXservice {
             data.put("notify_url", NOTIFY_URL);//回调地址
             data.put("trade_type", TRADE_TYPE_APP);//交易类型
             //附加数据，在查询API和支付通知中原样返回，该字段主要用于商户携带订单的自定义数据
-            data.put("attach", user_id);
+            //data.put("attach", user_id);
             String sign = WXPayUtil.generateSignature(data, configUtil.getKey(), WXPayConstants.SignType.MD5);
             data.put("sign", sign); //生成签名
             String str = WXPayUtil.mapToXml(data);

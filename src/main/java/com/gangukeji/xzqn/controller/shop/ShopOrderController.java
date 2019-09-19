@@ -32,9 +32,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * @Author: hx
- * @Date: 2019/6/5 18:18
- * @Description: 商城订单控制器
  */
 @Slf4j
 @RestController
@@ -172,7 +169,7 @@ public class ShopOrderController {
     private Map<String, String> pay(@RequestBody String data, HttpServletRequest request) {
         SortedMap<String, String> respMap = null;
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
-        String totalFee = null;
+        String totalFee;
         try {
             int orderId = jsonObject.get("orderId").getAsInt();
             XzqnShopOrderMaster master = masterDao.findByOrderId(orderId);
@@ -189,10 +186,10 @@ public class ShopOrderController {
             String nonce_str = WXPayUtils.randomString();
             String body = "orderId" + orderId;
             SortedMap<String, String> packageParams = new TreeMap<>();
-            packageParams = WXPayUtils.initMap(openid, totalFee, spbillCreateIp, orderNo, nonce_str, body, packageParams);
+            packageParams = WXPayUtils.initMap2(openid, totalFee, spbillCreateIp, orderNo, nonce_str, body, packageParams);
             String mapStr = WXPayUtils.combineMap(packageParams);
             String mapToSign = MD5.md5(mapStr, "&key=" + WXPayConfig.key).toUpperCase();
-            String xml = WXPayUtils.getXML(openid, totalFee, spbillCreateIp, orderNo, nonce_str, body, mapToSign);
+            String xml = WXPayUtils.getXML2(openid, totalFee, spbillCreateIp, orderNo, nonce_str, body, mapToSign);
             RestTemplate restTemplate = new RestTemplate();
             String wxResp = restTemplate.postForEntity("https://api.mch.weixin.qq.com/pay/unifiedorder", xml, String.class).getBody();
             wxResp = new String(wxResp.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);

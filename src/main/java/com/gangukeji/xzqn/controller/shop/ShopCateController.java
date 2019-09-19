@@ -1,17 +1,20 @@
 package com.gangukeji.xzqn.controller.shop;
 
 import com.gangukeji.xzqn.dao.ShopCateDao;
+import com.gangukeji.xzqn.entity.XzqnNews;
 import com.gangukeji.xzqn.entity.view.BigCate;
 import com.gangukeji.xzqn.entity.view.SmallCate;
 import com.gangukeji.xzqn.entity.shop.XzqnShopCate;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.gangukeji.xzqn.utils.Utils;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import java.util.List;
  * @Date: 2019/6/5 18:18
  * @Description: 商城分类的添加
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("shop/cate")
 public class ShopCateController {
@@ -57,9 +61,13 @@ public class ShopCateController {
     @PostMapping({"update"})
     private Result updateCate(@RequestBody XzqnShopCate object) {
         XzqnShopCate save = new XzqnShopCate();
+
         Utils.copyPropertiesIgnoreNull(object, save);
+        if(save.getCateId()<10){
+            return ResultUtils.error(200, "不能修改大类" );
+        }
         save = cateDao.save(object);
-        return ResultUtils.success(200, "添加object成功", save);
+        return ResultUtils.success(200, "修改object成功", save);
     }
 
     /**
@@ -123,5 +131,25 @@ public class ShopCateController {
 //        Object o = new Gson().fromJson( "[1,2,3,4,5,6]", type);
 
         return ResultUtils.success(200, "object查找所有成功", result);
+    }
+
+    @PostMapping("/cateFindAll")
+    private Result findAllCate2(@RequestBody String data) {
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnShopCate> news = cateDao.findAll(pageable);
+        return ResultUtils.success(200,"查找所有分类成功",news);
+    }
+
+    @PostMapping("/parentidFindcateid")
+    private Result findAllCate3(@RequestBody String data) {
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer parentId = jsonObject.get("parentId").getAsInt();
+        Integer page = jsonObject.get("page").getAsInt();
+        Sort sort = new Sort(Sort.Direction.ASC, "cateId");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        List<XzqnShopCate> news = cateDao.findByCateId(parentId,pageable);
+        return ResultUtils.success(200,"通过大类查找小类成功",news);
     }
 }

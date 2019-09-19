@@ -15,6 +15,7 @@ import com.gangukeji.xzqn.utils.ListToPageUtil;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.gangukeji.xzqn.entity.view.AuthAll;
+import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -138,21 +139,26 @@ public class PCAuthController {
         userIdSet.addAll(authSkillDao.getAuthUserId());
         int userIdOut = 0;
         for (Integer userId : userIdSet) {
-            userIdOut = userId;
-            AuthAll authAll = new AuthAll();
-            Object[] args = (Object[]) receiveUserDao.findByNameAndHeadImgByUserId(userId);
-            if (args != null) {
-                authAll.setName((String) args[0]);
-                authAll.setHead_img((String) args[1]);
+            if(userId==null){
+
+            }else{
+                userIdOut = userId;
+                AuthAll authAll = new AuthAll();
+                Object[] args = (Object[]) receiveUserDao.findByNameAndHeadImgByUserId(userId);
+                if (args != null) {
+                    authAll.setName((String) args[0]);
+                    authAll.setHead_img((String) args[1]);
+                }
+                authAll.setStatusContent(authContentDao.getAuthStatus(userId).orElse(0));
+                authAll.setStatusPerson(authPersonDao.getAuthStatus(userId).orElse(0));
+                authAll.setStatusSkill(authSkillDao.getAuthStatus(userId).orElse(0));
+                authAll.setAuthContent(authContentDao.findTopByUserIdOrderByIdDesc(userId));
+                authAll.setAuthSkill(authSkillDao.findTopByUserIdOrderByIdDesc(userId));
+                authAll.setAuthPerson(authPersonDao.findTopByUserIdOrderByIdDesc(userId));
+                authAll.setUserId(userIdOut);
+                authAlls.add(authAll);
             }
-            authAll.setStatusContent(authContentDao.getAuthStatus(userId).orElse(0));
-            authAll.setStatusPerson(authPersonDao.getAuthStatus(userId).orElse(0));
-            authAll.setStatusSkill(authSkillDao.getAuthStatus(userId).orElse(0));
-            authAll.setAuthContent(authContentDao.findTopByUserIdOrderByIdDesc(userId));
-            authAll.setAuthSkill(authSkillDao.findTopByUserIdOrderByIdDesc(userId));
-            authAll.setAuthPerson(authPersonDao.findTopByUserIdOrderByIdDesc(userId));
-            authAll.setUserId(userIdOut);
-            authAlls.add(authAll);
+
         }
         List resp = ListToPageUtil.go2(pageRequest.getPageNumber(), pageRequest.getPageSize(), authAlls);
         Result result = ResultUtils.success(200, "查询全部认证成功总记录数:" + resp.size(), resp);
@@ -163,13 +169,52 @@ public class PCAuthController {
         return map;
     }
 
+    @PostMapping("/index/xzqn/authAndSend")
+    public Result findAuthAndSend(@PageableDefault Pageable pageRequest) throws Exception{
+        Set<Integer> userIdSet = new HashSet<>();
+        ArrayList<AuthAll> authAlls = new ArrayList<>();
+        userIdSet.addAll(authPersonDao.getAuthUserId());
+        userIdSet.addAll(authContentDao.getAuthUserId());
+        userIdSet.addAll(authSkillDao.getAuthUserId());
+        int userIdOut = 0;
+        for (Integer userId : userIdSet) {
+            if(userId==null){
+
+            }else{
+                userIdOut = userId;
+                AuthAll authAll = new AuthAll();
+                Object[] args = (Object[]) receiveUserDao.findByNameAndHeadImgByUserId(userId);
+                if (args != null) {
+                    authAll.setName((String) args[0]);
+                    authAll.setHead_img((String) args[1]);
+                }
+                authAll.setStatusContent(authContentDao.getAuthStatus(userId).orElse(0));
+                authAll.setStatusPerson(authPersonDao.getAuthStatus(userId).orElse(0));
+                authAll.setStatusSkill(authSkillDao.getAuthStatus(userId).orElse(0));
+                authAll.setAuthContent(authContentDao.findTopByUserIdOrderByIdDesc(userId));
+                authAll.setAuthSkill(authSkillDao.findTopByUserIdOrderByIdDesc(userId));
+                authAll.setAuthPerson(authPersonDao.findTopByUserIdOrderByIdDesc(userId));
+                authAll.setUserId(userIdOut);
+                authAlls.add(authAll);
+            }
+
+        }
+        Integer sendNums=sendUserDao.findBySendNums();
+
+        HashMap<String,Object> map1=new HashMap();
+        map1.put("authNums", authAlls.size());
+        map1.put("sendNums", sendNums);
+        return ResultUtils.success(200, "查询师傅与发单方认证数:",map1);
+    }
+
     //分页，按创建时间倒序方式查询发单方
-    @PostMapping("auth/send/findAll/{page}")
+    @PostMapping("auth/send/findAll")
     //(@PathVariable("page") int page)
     //(@PageableDefault Pageable pageable)
-    public Object findAllSend(@PathVariable("page") int page) throws  Exception {
+    public Object findAllSend(@RequestBody String data) throws  Exception {
         //分页+排序查询演示：
         //Pageable pageable = new PageRequest(page, size);//2.0版本后,该方法已过时
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "updateTime","createTime");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnUserSend> sendUsers = sendUserDao.findAll(pageable);

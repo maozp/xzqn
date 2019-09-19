@@ -6,7 +6,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://129.28.157.228:3366/xzqn_dev3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://129.28.157.228:3366/xzqn_dev3?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull
   application:
     name: basic_dev
   servlet:

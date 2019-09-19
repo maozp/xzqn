@@ -23,23 +23,15 @@ public class XzqnServiceVideos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "video_name")
-    private String videoname;
+    private String videoName;
     @Column(name = "video_des")
-    private String videodes;
+    private String videoDes;
     @Column(name = "video_type")
-    private String videotype;
+    private String videoType;
     @Column(name = "video_date")
-    private Date videodate;
+    private Date videoDate;
     @Column(name = "video_addr")
-    private String videoaddr;
-    @Column
-    private Integer isCollect;
-    @Column
-    private Date collectTime;
-    @Column
-    private Integer isLike;
-    @Column
-    private Date likeTime;
+    private String videoAddr;
     @Column
     private Integer LikeNums;
     @Column

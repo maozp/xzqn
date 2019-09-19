@@ -19,7 +19,7 @@ import java.util.Date;
 public class XzqnAuthSkill extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String refuseReason;
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String skillCertificate;
 	//用户id 如果属性名与数据库字段名相同可以省略@Column，但不建议这么使用
 	private Integer userId;

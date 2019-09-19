@@ -1,6 +1,8 @@
 package com.gangukeji.xzqn.controller.shop;
 
 import com.gangukeji.xzqn.dao.*;
+import com.gangukeji.xzqn.entity.XzqnAuthSkill;
+import com.gangukeji.xzqn.entity.XzqnNews;
 import com.gangukeji.xzqn.entity.shop.*;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
@@ -10,16 +12,15 @@ import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("shop/product")
+@CrossOrigin("*")
 public class ShopProductController {
     @Resource
     ShopProductInfoDao productDao;
@@ -43,11 +45,42 @@ public class ShopProductController {
     @PostMapping({"add", "update"})
     private Result productAdd(@RequestBody XzqnShopProductInfo product) {
         XzqnShopProductInfo save;
-        save = productDao.findById(product.getProductId()).orElse(product);
-        Utils.copyPropertiesIgnoreNull(product, save);
-        save = productDao.save(save);
+        if(product.getProductId()==null){
+            save=productDao.save(product);
+        }else{
+            save = productDao.findById(product.getProductId()).orElse(product);
+            Utils.copyPropertiesIgnoreNull(product, save);
+            save = productDao.save(save);
+        }
         return ResultUtils.success(200, "商品添加|更新成功", save);
     }
+
+    //XzqnShopCate save = cateDao.save(object);
+    // 商品 添加|更新
+//    @PostMapping({"addV2"})
+//    private Result productAdd2(@RequestBody String data) {
+//
+//        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+//        JsonArray jsonArray = jsonObject.get("des").getAsJsonArray();
+//        Type type = new TypeToken<List<String>>() {
+//        }.getType();
+//        List<String> desc= new Gson().fromJson(jsonArray, type);
+//        StringBuilder stringBuilder = new StringBuilder();
+//        desc.forEach(des -> stringBuilder.append(des).append("@"));
+//
+//        JsonArray jsonArray2 = jsonObject.get("pic").getAsJsonArray();
+//        List<String> pics= new Gson().fromJson(jsonArray2, type);
+//        pics.forEach(pic -> stringBuilder.append(pic).append("@"));
+//
+//        JsonArray jsonArray3 = jsonObject.get("img").getAsJsonArray();
+//        List<String> imgs= new Gson().fromJson(jsonArray3, type);
+//        imgs.forEach(img -> stringBuilder.append(img).append("@"));
+//
+//
+//        XzqnShopProductInfo shopProductInfo = new XzqnShopProductInfo();
+//
+//        return ResultUtils.success(200, "商品添加", save);
+//    }
 
     // 商品 删除
     @PostMapping({"delete"})
@@ -61,19 +94,27 @@ public class ShopProductController {
         return ResultUtils.success(200, "商品删除成功", productId);
     }
 
-//     商品 查全部
+
+    //     商品 查全部
     @PostMapping({"findAll"})
     private Result productAll(@RequestBody String data) {
-        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
-        PageRequest pageRequest = new PageRequest(0, 100);
-        try {
-            pageRequest = new PageRequest(jsonObject.get("page").getAsInt(), jsonObject.get("size").getAsInt());
-        } catch (Exception e) {
-            System.out.println("未分页");
-        }
-        Page<XzqnShopProductInfo> productList = productDao.findAll(pageRequest);
-        return ResultUtils.success(200, "查找全部商品成功", productList.getContent());
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnShopProductInfo> productList = productDao.findAll(pageable);
+        return ResultUtils.success(200, "查找全部商品成功", productList);
     }
+
+    //    cateid查找类名
+    @PostMapping({"findAllV2"})
+    private Result productAllV2(@RequestBody String data) {
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        List<Object> productList = productDao.findAllandCateName();
+        return ResultUtils.success(200, "查找全部商品成功", productList);
+    }
+
 
     //商品 cateId查
     @PostMapping({"findByCateId"})

@@ -11,22 +11,19 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Data
-@Table(name = "xzqn_news_comment")
-public class XzqnNewsComment {
+@Table(name = "xzqn_news_like")
+public class XzqnNewsLike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column
     private Integer userId;
-    @Column
-    private String userName;
-    @Column
-    private Date commentTime;
-    @Column(name = "comment",columnDefinition = "TEXT")
-    private String comment;
-    @Column
-    private String userHeadImg;
+
     @Column
     private Integer newsId;
+
+    @Column
+    private Date likeTime;
 }
