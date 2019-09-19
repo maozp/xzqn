@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9ce3846a-db5f-46e3-a264-605e72b19f83" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_fastjson_1_2_48.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_59.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/PCindexController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/RongController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsLikeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsLogDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideoLikeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideoLogDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsLike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideoLike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideoLog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/CodeUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_11.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_10.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopCateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopCateController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/PublishController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/PublishController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/SetStatusControllerV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/SetStatusControllerV3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/NewsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/NewsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/PCAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/PCAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/ServiceVideosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/ServiceVideosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/WXController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/WXController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsCommentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsCommentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceOrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideosDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideosDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopCateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopCateDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopOrderDetailDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopOrderDetailDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopOrderMasterDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopOrderMasterDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopProductInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopProductInfoDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnAuthSkill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnAuthSkill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNews.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNews.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsComment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/shop/XzqnShopProductInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/shop/XzqnShopProductInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/service/WXservice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/service/WXservice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/serviceImpl/WXserviceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/serviceImpl/WXserviceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/pay/WXConfigUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/pay/WXConfigUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/pay/WXPayUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/pay/WXPayUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-https.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-https.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-myserver.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-myserver.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1902253768">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="36" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.26" value="1" />
+          <entry key="project.open.time.27" value="2" />
+          <entry key="project.open.time.28" value="8" />
+          <entry key="project.open.time.29" value="7" />
+          <entry key="project.open.time.30" value="6" />
+          <entry key="project.open.time.31" value="6" />
+          <entry key="project.open.time.33" value="3" />
+          <entry key="project.open.time.34" value="1" />
+          <entry key="project.open.time.35" value="3" />
+          <entry key="project.open.time.38" value="2" />
+          <entry key="project.open.time.40" value="1" />
+          <entry key="project.open.time.47" value="1" />
+          <entry key="project.open.time.49" value="1" />
+          <entry key="project.open.time.62" value="1" />
+          <entry key="project.opened" value="45" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="5" />
+          <entry key="JAVA" value="1297" />
+          <entry key="XML" value="3" />
+          <entry key="YAML" value="17" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="18858" />
+          <entry key="PLAIN_TEXT" value="105" />
+          <entry key="Spring Data QL" value="10" />
+          <entry key="XML" value="21" />
+          <entry key="YAML" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Long</find>
+      <find>wx</find>
+      <find>成功</find>
+      <find>Base</find>
+      <find>codec</find>
+      <find>news</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>Integer</replace>
+      <replace>videos</replace>
+      <replace>video</replace>
+      <replace>鱼塘</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/serviceImpl/WXserviceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnOrderImg.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/WXController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnAuthSkill.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/AuthController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/CodeUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/RongUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsComment.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsCommentDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/PublishController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopOrderController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/AuthSignController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/AesCbcUtil.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/PCAuthController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/PCadminController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsLog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopCateDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/ListOrderController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/RongController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/SetStatusControllerV3.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideoLog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideoLike.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideoLikeDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/shop/XzqnShopProductInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopProductInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopProductController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-https.yml" />
+        <option value="$PROJECT_DIR$/src/main/resources/application-myserver.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideoLogDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsLogDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNews.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnNewsLike.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsLikeDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/NewsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/NewsDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnServiceVideos.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/ServiceVideosController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceVideosDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/WeekChart.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopCateController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopUserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceOrderDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopOrderMasterDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/cityChart.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/PCindexController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/LoginController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="y" value="-10" />
+    <option name="width" value="979" />
+    <option name="height" value="1049" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+          <State>
+            <id>CodeSpring CoreSpring</id>
+          </State>
+          <State>
+            <id>Spring</id>
+          </State>
+          <State>
+            <id>Spring CoreSpring</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>SpringJavaInjectionPointsAutowiringInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="gangukeji" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="gangukeji" type="462c0819:PsiDirectoryNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="gangukeji" type="462c0819:PsiDirectoryNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="gangukeji" type="462c0819:PsiDirectoryNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="gangukeji" type="462c0819:PsiDirectoryNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="xzqn" type="462c0819:PsiDirectoryNode" />
+              <item name="other" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="D:/intellij/sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568716077519" />
+    <property name="last_opened_file_path" value="D:/Downloads/sell" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="Lombok plugin" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Maven.package">
+    <configuration name="Unnamed" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <module name="1" />
+      <option name="filePath" value="" />
+      <option name="vmParameters" value="" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" value="" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" value="" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="filePath" value="" />
+      <option name="vmParameters" value="" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" value="" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" value="" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="package" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="package" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="XzqnApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.gangukeji.xzqn.XzqnApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Kotlin script.Unnamed" />
+      <item itemvalue="Maven.package" />
+      <item itemvalue="Spring Boot.XzqnApplication" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ce3846a-db5f-46e3-a264-605e72b19f83" name="Default Changelist" comment="" />
+      <created>1565774162386</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565774162386</updated>
+      <workItem from="1565774163728" duration="93000" />
+      <workItem from="1565774485795" duration="4451000" />
+      <workItem from="1565783325169" duration="2439000" />
+      <workItem from="1566402508856" duration="3830000" />
+      <workItem from="1566435668896" duration="28057000" />
+      <workItem from="1566482000271" duration="8905000" />
+      <workItem from="1566522105692" duration="28960000" />
+      <workItem from="1566608361165" duration="26467000" />
+      <workItem from="1566781433914" duration="22017000" />
+      <workItem from="1566867714364" duration="7997000" />
+      <workItem from="1566884292741" duration="10018000" />
+      <workItem from="1566911119179" duration="594000" />
+      <workItem from="1566954310438" duration="7978000" />
+      <workItem from="1566970671202" duration="5733000" />
+      <workItem from="1566977553668" duration="11822000" />
+      <workItem from="1566997902759" duration="12423000" />
+      <workItem from="1567041010795" duration="35330000" />
+      <workItem from="1567127323011" duration="33400000" />
+      <workItem from="1567213402875" duration="32359000" />
+      <workItem from="1567315579702" duration="14503000" />
+      <workItem from="1567352541982" duration="1629000" />
+      <workItem from="1567386301101" duration="46749000" />
+      <workItem from="1567472840057" duration="30673000" />
+      <workItem from="1567514151243" duration="14755000" />
+      <workItem from="1567558477186" duration="29755000" />
+      <workItem from="1567606328229" duration="7357000" />
+      <workItem from="1567645455506" duration="27641000" />
+      <workItem from="1567693055598" duration="3520000" />
+      <workItem from="1567731861049" duration="13035000" />
+      <workItem from="1567753545383" duration="12365000" />
+      <workItem from="1567780385143" duration="5093000" />
+      <workItem from="1567818137231" duration="28684000" />
+      <workItem from="1567935334715" duration="45821000" />
+      <workItem from="1568038522198" duration="1530000" />
+      <workItem from="1568040548763" duration="120000" />
+      <workItem from="1568040897079" duration="3823000" />
+      <workItem from="1568077294562" duration="26135000" />
+      <workItem from="1568125972132" duration="6456000" />
+      <workItem from="1568163714527" duration="22174000" />
+      <workItem from="1568211590672" duration="9495000" />
+      <workItem from="1568250190897" duration="32729000" />
+      <workItem from="1568527854232" duration="18143000" />
+      <workItem from="1568595679718" duration="26114000" />
+      <workItem from="1568682151616" duration="18601000" />
+      <workItem from="1568733006923" duration="281000" />
+    </task>
+    <task id="LOCAL-00001" summary="second commit">
+      <created>1566405784012</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1566405784012</updated>
+    </task>
+    <task id="LOCAL-00002" summary="second commit">
+      <created>1566406302761</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1566406302761</updated>
+    </task>
+    <task id="LOCAL-00003" summary="增加签到功能">
+      <created>1566491208681</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1566491208681</updated>
+    </task>
+    <task id="LOCAL-00004" summary="重置appId">
+      <created>1566544566408</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566544566408</updated>
+    </task>
+    <task id="LOCAL-00005" summary="重置appId">
+      <created>1566551800897</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1566551800897</updated>
+    </task>
+    <task id="LOCAL-00006" summary="完善签到功能">
+      <created>1567049672298</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567049672298</updated>
+    </task>
+    <task id="LOCAL-00007" summary="完善签到功能">
+      <created>1567093995700</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1567093995700</updated>
+    </task>
+    <task id="LOCAL-00008" summary="完善签到功能，添加app手机注册登录">
+      <created>1567396444251</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1567396444251</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="730054000" />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24262735" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798927" weight="0.21388102" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2733711" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" visible="true" weight="0.08640227" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5020107" side_tool="true" weight="0.25212464" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.25637394" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.3295129" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.23087819" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Bean Validation" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="second commit" />
+    <MESSAGE value="增加签到功能" />
+    <MESSAGE value="重置appId" />
+    <MESSAGE value="完善签到功能" />
+    <MESSAGE value="完善签到功能，添加app手机注册登录" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善签到功能，添加app手机注册登录" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/RongController.java</url>
+          <line>41</line>
+          <properties class="com.gangukeji.xzqn.controller.xzqn.other.RongController">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/LoginController.java</url>
+          <line>359</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/UserController.java</url>
+          <line>253</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="openid" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/ReceiveDataInOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/ServiceVideosController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="130" column="44" lean-forward="true" selection-start-line="130" selection-start-column="44" selection-end-line="130" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/WeekChart.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopProductInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/shop/XzqnShopCate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ShopOrderMasterDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ServiceOrderDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="46" column="555" selection-start-line="46" selection-start-column="540" selection-end-line="46" selection-end-column="555" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1311">
+          <caret line="90" column="31" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/HttpUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4161">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/springframework/spring-core/5.1.6.RELEASE/spring-core-5.1.6.RELEASE-sources.jar!/org/springframework/util/DigestUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1539">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/MD5.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/SetStatusController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="280" column="57" lean-forward="true" selection-start-line="280" selection-start-column="57" selection-end-line="280" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/pay/IpUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-504">
+          <caret line="51" column="13" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnFollow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/Area.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/LogView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="14" selection-start-line="14" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/RongController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.1.4.RELEASE/spring-boot-autoconfigure-2.1.4.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/orm/jpa/JpaBaseConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="136" column="50" selection-start-line="136" selection-start-column="50" selection-end-line="136" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/9.0.17/tomcat-embed-core-9.0.17-sources.jar!/org/apache/catalina/core/ApplicationFilterChain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="807">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/SmallCate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/response/ComputePriceInfoResp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnAdmin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnAuthContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/PCAuthController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="145" column="16" selection-start-line="145" selection-start-column="16" selection-end-line="145" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/AuthAll.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="21" column="16" lean-forward="true" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/AuthView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/cityChart.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/ShopCateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="93" column="53" lean-forward="true" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Integer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="51" column="19" selection-start-line="51" selection-start-column="19" selection-end-line="51" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/view/BigCate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/ServiceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="77" column="23" selection-start-line="77" selection-start-column="23" selection-end-line="77" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/ListGrabOrderControllerV2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/PublishController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-338">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/SetStatusControllerV3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6608">
+          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/AddOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3473">
+          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/DetailOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/GrabRecordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1292">
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/ListGrabOrderControllerV3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3065">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/order/ListOrderController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="50" column="14" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnMessageAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/MessageAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="63" selection-start-line="10" selection-start-column="63" selection-end-line="10" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/utils/WaterMarkUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="61" column="15" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/entity/XzqnUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1064">
+          <caret line="68" column="23" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/ReceiveUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/MessageAdviceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/xzqn/other/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="320" column="33" selection-start-line="320" selection-start-column="33" selection-end-line="320" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/gangukeji/xzqn/controller/shop/PCindexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="202" column="10" selection-start-line="202" selection-start-column="10" selection-end-line="202" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
