@@ -15,4 +15,7 @@ public interface NewsCommentDao extends JpaRepository<XzqnNewsComment,Integer> {
     //SELECT * FROM xzqn_news_comment where news_id=1 ORDER BY comment_time DESC
     @Query("select n from XzqnNewsComment n where n.newsId=?1 ORDER BY n.commentTime DESC ")
     List<XzqnNewsComment> findByComment(Integer newsId, Pageable pageable);
+
+    @Query(value = "SELECT COUNT(news_id) FROM xzqn_news_comment where news_id=?1",nativeQuery = true)
+    Integer findCountComment(Integer newsId);
 }

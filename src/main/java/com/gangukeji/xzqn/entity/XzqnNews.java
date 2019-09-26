@@ -1,5 +1,6 @@
 package com.gangukeji.xzqn.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class XzqnNews {
     private String newsTitle;
     @Column(name = "news_date")
     private Date newsDate;
-    @Column(name = "news_content",columnDefinition = "TEXT")
+    @Column(name = "news_content",columnDefinition = "MEDIUMTEXT")
     private String newsContent;
     @Column
     private Integer newsReadNums;
@@ -29,7 +30,7 @@ public class XzqnNews {
     private Integer newsCommentNums;
     @Column
     private Integer newsLikeNums;
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String titleFirstImg;
     @Column
     private String titleSecondImg;
@@ -37,4 +38,6 @@ public class XzqnNews {
     private String titleThirdImg;
     @Column
     private Integer newsType;
+    @Column
+    private String newsUrl;
 }

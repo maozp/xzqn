@@ -20,6 +20,24 @@ import java.util.List;
 @Repository
 @Transactional
 public interface ServicePublishDao extends JpaRepository<XzqnServicePublish, Integer> {
+
+    //计算发布订单总数
+    //SELECT COUNT(order_id) FROM xzqn_service_order
+    @Query(value = "SELECT count(id) FROM `xzqn_service_publish` WHERE is_cancel=0 ",nativeQuery=true)
+    int findByOrderNums();
+    //计算7天内订单数
+    //select COUNT(order_id) from xzqn_service_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(update_time) AND is_pay=1
+    @Query(value = "select COUNT(id) from xzqn_service_publish where DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(create_time) AND is_cancel=0",nativeQuery=true)
+    int findByWeekOrderNums();
+    //计算今天订单数
+    //select COUNT(order_id) from xzqn_service_order where DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= date(update_time) AND is_pay=1
+    @Query(value = "select COUNT(id) from xzqn_service_publish where TO_DAYS(create_time)=TO_DAYS(NOW()) AND is_cancel=0",nativeQuery=true)
+    int findByTodayOrderNums();
+    //计算本月内订单数
+    //SELECT COUNT(order_id) FROM xzqn_service_order WHERE DATE_FORMAT( create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) AND is_cancel=0
+    @Query(value = "SELECT COUNT(id) FROM xzqn_service_publish WHERE DATE_FORMAT( create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) AND is_cancel=0",nativeQuery=true)
+    int findByMonthOrderNums();
+
 //    List<XzqnServicePublish> findByStatusAndSendUserId(Integer status, Integer sendUserId);
 
     List<XzqnServicePublish> findByUserIdAndStatusIn(Integer sendUserId, int[] statusArray);

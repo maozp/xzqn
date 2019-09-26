@@ -77,6 +77,40 @@ public class ListGrabOrderControllerV3 {
     }
 
     /**
+     * 抢单列表
+     *
+     * @param data
+     * @return
+     */
+    @Log("抢单列表")
+    @PostMapping({"serviceOrder/findAllGrab/v4"})
+    public Result findGrabAllV4(@RequestBody String data) {
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        //设置分页和排序
+        PageRequest pageRequest = null;
+        String msg = null;
+        //可以把分页抽出来   orders优先考虑 status 在考虑id
+        Sort orders = (new Sort(Sort.Direction.ASC, "status")).and(new Sort(Sort.Direction.DESC, "id"));
+        try {
+            int page = jsonObject.get("page").getAsInt();
+            int size = jsonObject.get("size").getAsInt();
+            pageRequest = new PageRequest(page, size, orders);
+            msg = "抢单列表page:" + page + "&size:" + size;
+        } catch (Exception e) {
+            pageRequest = new PageRequest(0, 10, orders);
+            msg = "未排序只给10条";
+        }
+        //查找抢单列表
+        int[] statusArray = new int[]{4, 5};
+        List<XzqnServicePublish> grabList = publishDao.findAllByStatusInAndIsCancelAndIsCheckIs(statusArray, pageRequest, false,1);
+
+        // 1算距离 2factor 3状态名描述 4去掉 cancel
+        //setGrabList(grabList, jsonObject);
+        setReceiveUserIdList(grabList);
+        return ResultUtils.success(200, msg, grabList);
+    }
+
+    /**
      * 设置师傅抢单列表抢了该订单的师傅的ids
      * @param grabList
      */

@@ -31,7 +31,8 @@ public class PCindexController {
     ShopUserDao shopUserDao;
     @Autowired
     ShopOrderMasterDao shopOrderMasterDao;
-
+    @Autowired
+    ServicePublishDao servicePublishDao;
 
 
     @PostMapping("/xzqn/statis")
@@ -107,14 +108,20 @@ public class PCindexController {
     //订单总数
     @PostMapping("/xzqn/totalOrder")
     public Result totalOrder() {
-        //小正青年订单总数
-        Integer orderNums=serviceOrderDao.findByOrderNums();
+//        //小正青年服务订单总数
+//        Integer orderNums=serviceOrderDao.findByOrderNums();
+//        //7天服务订单数
+//        Integer weekOrder = serviceOrderDao.findByWeekOrderNums();
+//        ///今天服务订单数
+//        Integer todayOrder = serviceOrderDao.findByTodayOrderNums();
+        //小正青年订单数
+        Integer orderNums=servicePublishDao.findByOrderNums();
         //7天订单数
-        Integer weekOrder = serviceOrderDao.findByWeekOrderNums();
-        ///今天订单数
-        Integer todayOrder = serviceOrderDao.findByTodayOrderNums();
+        Integer weekOrder = servicePublishDao.findByWeekOrderNums();
+        //今日订单数
+        Integer todayOrder = servicePublishDao.findByTodayOrderNums();
         //本月订单数
-        Integer monthOrder = serviceOrderDao.findByMonthOrderNums();
+        Integer monthOrder = servicePublishDao.findByMonthOrderNums();
         //本月成交金额数
         BigDecimal monthMoney = serviceOrderDao.findByMonthOrderMoney();
         //未接过单的用户
@@ -185,6 +192,16 @@ public class PCindexController {
         map.put("month",orderChart);
         map.put("count",orderChartNums);
         return ResultUtils.success(200,"查询前6月折线订单数成功",map);
+    }
+    //6个月交易金额比较
+    @PostMapping("/xzqn/monthMoneyChart")
+    public Result moneyOrder() {
+        List<String> orderChart = serviceOrderDao.findByMonthOrderChartDate();
+        List<String> orderChartNums = serviceOrderDao.findByMonthMoneyChartCount();
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("month",orderChart);
+        map.put("money",orderChartNums);
+        return ResultUtils.success(200,"查询前6月折线交易金额成功",map);
     }
 
 

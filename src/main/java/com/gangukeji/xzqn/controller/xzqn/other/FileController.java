@@ -229,4 +229,32 @@ public class FileController {
             return "";
         }
     }
+
+    //接收视频
+    @PostMapping("upload/editor")
+    @ResponseBody
+    @Log
+    public Object uploadEditor(@RequestParam("file") MultipartFile file) {
+
+        if (file.isEmpty()) {
+            return "";
+        }
+        filePath = System.getProperty("user.dir");
+        String filename = System.currentTimeMillis() + String.valueOf(RandomUtils.nextInt(100000, 999999));
+        File dest = new File(filePath + File.separator + "static" + File.separator + filename);
+        //扩展名
+        String suffix=file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        try {
+            FileCopyUtils.copy(file.getInputStream(),new FileOutputStream(dest+suffix));
+            HashMap<String,String> map=new HashMap<>();
+            map.put("errno","0");
+            map.put("data",url + filename+suffix);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+
 }

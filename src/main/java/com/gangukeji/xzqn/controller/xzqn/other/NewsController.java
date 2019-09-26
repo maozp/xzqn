@@ -2,20 +2,28 @@ package com.gangukeji.xzqn.controller.xzqn.other;
 
 import com.gangukeji.xzqn.dao.*;
 import com.gangukeji.xzqn.entity.*;
+import com.gangukeji.xzqn.utils.EscapeUtils;
+import com.gangukeji.xzqn.utils.HtmlUtils;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
+import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.RandomUtils;
+import org.apache.tomcat.util.security.Escape;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.lang.reflect.Type;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -26,6 +34,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping
+@CrossOrigin("*")
 public class NewsController {
 
     @Resource
@@ -38,12 +47,93 @@ public class NewsController {
     NewsCommentDao newsCommentDao;
     @Resource
     UserDao userDao;
+    @Value("${server.url}")
+    private String url;
 
     private String msg;
     private String rmsg;
     Date now = new Date();
 
     Gson gson = (new GsonBuilder()).setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+
+    //后台添加资讯信息
+    @PostMapping("/newsSubmit")
+    public Result newsSubmit(@RequestBody String data) throws  Exception {
+        XzqnNews news = gson.fromJson(data, XzqnNews.class);
+
+        String newsContent=new JsonParser().parse(data).getAsJsonObject().get("newsContent").getAsString();
+        newsContent= EscapeUtils.unescape(newsContent);
+        news.setNewsContent(newsContent);
+        newsContent="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
+                "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+                "<head>\n" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
+                "<title>"+news.getNewsTitle() +"</title>\n" +
+                "</head>"+newsContent+"</body>\n" +
+                "</html>";
+        String filePath = System.getProperty("user.dir");
+        String filename = System.currentTimeMillis() + String.valueOf(RandomUtils.nextInt(100000, 999999));
+        File dest = new File(filePath + File.separator + "static" + File.separator + filename);
+        System.out.println(dest.toString());
+
+        String result= HtmlUtils.makeHtml(newsContent,filePath,filename);
+        news.setNewsUrl(url+filename+".html");
+        news.setNewsLikeNums(0);
+        news.setNewsReadNums(0);
+        news.setNewsCommentNums(0);
+        news.setNewsDate(now);
+
+        news=newsDao.save(news);
+        //news.getTitleFirstImg().split("@");
+//        HashMap<Object,Object> map=new HashMap<>();
+//        map.put("id",news.getId());
+//        map.put("newsTitle",news.getNewsTitle());
+//        map.put("newsContent",news.getNewsContent());
+//        map.put("newsReadNums",news.getNewsReadNums());
+//        map.put("newsCommentNums",news.getNewsCommentNums());
+//        map.put("newsLikeNums",news.getNewsLikeNums());
+//        map.put("titleFirstImg",news.getTitleFirstImg());
+//        map.put("newsType",news.getNewsType());
+//        map.put("newsUrl",news.getNewsUrl());
+//        map.put("ImgList",news.getTitleFirstImg().split("@"));
+        return ResultUtils.success(200,"添加资讯成功",news);
+    }
+
+    //后台修改资讯信息
+    @PostMapping("/newsUpdate")
+    public Result updateSubmit(@RequestBody String data) throws  Exception {
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer newsId=jsonObject.get("id").getAsInt();
+        XzqnNews news=newsDao.findById(newsId).get();
+
+        news =gson.fromJson(data, XzqnNews.class);
+        String newsContent=news.getNewsContent();
+        newsContent="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
+                "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+                "<head>\n" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
+                "<title>"+news.getNewsTitle() +"</title>\n" +
+                "</head>"+newsContent+"</body>\n" +
+                "</html>";
+        String filePath = System.getProperty("user.dir");
+        String filename = System.currentTimeMillis() + String.valueOf(RandomUtils.nextInt(100000, 999999));
+        File dest = new File(filePath + File.separator + "static" + File.separator + filename);
+        System.out.println(dest.toString());
+
+        String result= HtmlUtils.makeHtml(newsContent,filePath,filename);
+        news.setNewsUrl(url+filename+".html");
+        newsDao.save(news);
+        return ResultUtils.success(200,"修改资讯成功",news);
+    }
+    //后台删除资讯信息
+    @PostMapping("/newsDelete")
+    public Result newsDelete(@RequestBody String data) throws  Exception {
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer newsId=jsonObject.get("id").getAsInt();
+        XzqnNews news=newsDao.findById(newsId).get();
+        newsDao.delete(news);
+        return ResultUtils.success(200,"删除资讯成功",news);
+    }
 
     //查看资讯列表
     @PostMapping("/newsFindAll")
@@ -58,14 +148,20 @@ public class NewsController {
     @PostMapping("/newsFind")
     public Result findNews(@RequestBody String data){
         Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
-        return ResultUtils.success(200,"查询资讯成功",newsDao.findById(id));
+        XzqnNews news=newsDao.findById(id).get();
+        news.setNewsReadNums(news.getNewsReadNums()+1);
+        news.setNewsCommentNums(newsCommentDao.findCountComment(id));
+        news.setNewsLikeNums(newsLikeDao.findCountLike(id));
+        newsDao.save(news);
+        return ResultUtils.success(200,"查询资讯成功",news);
     }
 
     //分享资讯详情
     @PostMapping("/newsShore")
     public Result findShore(@RequestBody String data){
         Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
-        return ResultUtils.success(200,"分享成功","https://www.xiaozheng8.com/"+id+".html");
+        String url=newsDao.findByIdUrl(id);
+        return ResultUtils.success(200,"分享成功",url);
     }
 
 
