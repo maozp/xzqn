@@ -17,7 +17,7 @@ public interface NewsLogDao extends JpaRepository<XzqnNewsLog,Integer> {
     @Query(value = "SELECT n FROM XzqnNewsLog n where n.userId=?1 AND n.collectNewsId=?2")
     XzqnNewsLog findByNewslog(Integer userId,Integer collectNewsId);
 
-    //查询收藏视频
+    //查询收藏资讯
     //SELECT * FROM xzqn_service_video_log where user_id=11154 ORDER BY collect_time ASC
     //SELECT * FROM xzqn_service_video_log  left join xzqn_service_videos on xzqn_service_video_log.collect_video_id=xzqn_service_videos.id WHERE user_id=11154
     @Query("select n.collectNewsId from XzqnNewsLog n where n.userId=?1 ORDER BY n.collectTime DESC ")

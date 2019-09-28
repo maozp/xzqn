@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -19,10 +16,8 @@ public class XzqnMessageAdvice {
     @Id  //说明id是主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) //使用自增数值作为主键
     private Integer id;
-    private Integer publishid;
-    private String type;
-    private String user;
-    private String auth;
+    @Column(columnDefinition = "TEXT")
+    private String content;
     private Date time;
 
 }

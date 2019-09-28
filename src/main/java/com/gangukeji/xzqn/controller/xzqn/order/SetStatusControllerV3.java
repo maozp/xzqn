@@ -2,11 +2,7 @@ package com.gangukeji.xzqn.controller.xzqn.order;
 
 import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.dao.*;
-import com.gangukeji.xzqn.entity.XzqnReceiveReport;
-import com.gangukeji.xzqn.entity.XzqnServiceOrder;
-import com.gangukeji.xzqn.entity.XzqnServicePublish;
-import com.gangukeji.xzqn.entity.XzqnGrabRecord;
-import com.gangukeji.xzqn.entity.XzqnPreServiceImage;
+import com.gangukeji.xzqn.entity.*;
 import com.gangukeji.xzqn.utils.ListToString;
 import com.gangukeji.xzqn.utils.MD5;
 import com.gangukeji.xzqn.utils.Result;
@@ -60,6 +56,10 @@ public class SetStatusControllerV3 {
     OrderImgDao orderImgDao;
     @Resource
     AuthSignDao authSignDao;
+    @Resource
+    MessageAdvice messageAdvice;
+    @Resource
+    UserReceiveDao userReceiveDao;
     // 订单状态改变全写一个接口
     @PostMapping("serviceOrder/setStatus/v3")
     @Log("set--status 设置状态")
@@ -102,6 +102,13 @@ public class SetStatusControllerV3 {
             updateLog(STATUS + 1, 1, 1, orderId);
             updateGrabRecord(receiveUserId, publishId);
             orderImgDao.updateOrderImg(orderId,publishId);
+
+            //添加通知栏信息
+            XzqnMessageAdvice xzqnMessageAdvice=new XzqnMessageAdvice();
+            String name=userReceiveDao.findByReceiveName(receiveUserId);
+            xzqnMessageAdvice.setContent(name.charAt(0)+"师傅抢到了一个新的订单");
+            xzqnMessageAdvice.setTime(order.getUpdateTime());
+            messageAdvice.save(xzqnMessageAdvice);
             return ResultUtils.success(200, "操作成功orderId:", orderId);
         }
         int id = jsonObject.get("orderId").getAsInt();

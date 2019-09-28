@@ -16,6 +16,8 @@ public class MessageAdviceController {
 
     @PostMapping("/MessageAdvice")
     public Result messageAdvice(){
-        return ResultUtils.success(200, "消息查询成功", messageAdvice.findAll());
+
+        return ResultUtils.success(200, "消息查询成功", messageAdvice.findbyMessage());
     }
+
 }

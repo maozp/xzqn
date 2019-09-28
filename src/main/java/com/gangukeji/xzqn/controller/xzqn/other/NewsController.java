@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -206,6 +207,42 @@ public class NewsController {
 
     }
 
+    //判断是否收藏
+    @PostMapping("/isNewsCollect")
+    public Result newsV2(@RequestBody String data) throws Exception{
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer userId=jsonObject.get("userId").getAsInt();
+        Integer newsId=jsonObject.get("collectNewsId").getAsInt();
+        XzqnNewsLog newsLog=newsLogDao.findByNewslog(userId,newsId);
+        HashMap<String,String> map=new HashMap<>();
+        if(newsLogDao.findByNewslog(userId,newsId)==null){
+            msg="未收藏";
+            map.put("isCollect","0");
+        }else {
+            msg="已收藏";
+            map.put("isCollect","1");
+        }
+        return ResultUtils.success(200,msg,map);
+    }
+
+    //判断是否点赞
+    @PostMapping("/isNewsLike")
+    public Result likeV2(@RequestBody String data) throws Exception{
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer userId=jsonObject.get("userId").getAsInt();
+        Integer newsId=jsonObject.get("newsId").getAsInt();
+        XzqnNewsLike newsLog=newsLikeDao.findByNewsLike(userId,newsId);
+        HashMap<String,String> map=new HashMap<>();
+        if(newsLikeDao.findByNewsLike(userId,newsId)==null){
+            msg="未收藏";
+            map.put("isLilk","0");
+        }else {
+            msg="已收藏";
+            map.put("isLilk","1");
+        }
+        return ResultUtils.success(200,msg,map);
+    }
+
     //收藏资讯接口
     @PostMapping("/collectNewsV2")
     public Result collectNewsV2(@RequestBody String data) throws Exception{
@@ -306,8 +343,8 @@ public class NewsController {
         Integer newsId = new JsonParser().parse(data).getAsJsonObject().get("newsId").getAsInt();
         Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "commentTime");
-        Pageable pageable = PageRequest.of(page, 10, sort);
-        List<XzqnNewsComment> news = newsCommentDao.findByComment(newsId,pageable);
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnNewsComment> news = newsCommentDao.findByComment(newsId,pageable);
         return ResultUtils.success(200,"查看资讯留言列表成功",news);
     }
 

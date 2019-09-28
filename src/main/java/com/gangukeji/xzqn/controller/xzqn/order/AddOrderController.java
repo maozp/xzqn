@@ -3,10 +3,7 @@ package com.gangukeji.xzqn.controller.xzqn.order;
 import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.controller.xzqn.other.WebSocket;
 import com.gangukeji.xzqn.dao.*;
-import com.gangukeji.xzqn.entity.XzqnServiceLog;
-import com.gangukeji.xzqn.entity.XzqnServiceOrderStatus;
-import com.gangukeji.xzqn.entity.XzqnServicePublish;
-import com.gangukeji.xzqn.entity.XzqnOrderImg;
+import com.gangukeji.xzqn.entity.*;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
 import com.google.gson.*;
@@ -49,6 +46,10 @@ public class AddOrderController {
     WebSocket webSocket;
     @Resource
     UserDao userDao;//获取发单用户id
+
+    @Resource
+    MessageAdvice messageAdvice;
+    Date now = new Date();
 
     /**
      * 立即下单
@@ -100,6 +101,12 @@ public class AddOrderController {
         publish.setFactorName(factorName);
         orderThing(data, publishId, publish.getUserId());
         saveImg(data,publishId);
+
+        //添加通知栏信息
+        XzqnMessageAdvice xzqnMessageAdvice=new XzqnMessageAdvice();
+        xzqnMessageAdvice.setContent(publish.getName().charAt(0)+"**发布了一个新的订单");
+        xzqnMessageAdvice.setTime(publish.getCreateTime());
+        messageAdvice.save(xzqnMessageAdvice);
 
         //发送websocket消息
         webSocket.sendMessage("有新的订单来了");

@@ -3,6 +3,7 @@ package com.gangukeji.xzqn.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,7 +29,8 @@ public class XzqnServiceVideos {
     private String videoDes;
     @Column(name = "video_type")
     private String videoType;
-    @Column(name = "video_date")
+    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+    @CreationTimestamp
     private Date videoDate;
     @Column(name = "video_addr")
     private String videoAddr;

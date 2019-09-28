@@ -1,6 +1,7 @@
 package com.gangukeji.xzqn.controller.xzqn.other;
 
 
+import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.dao.ServiceVideoLikeDao;
 import com.gangukeji.xzqn.dao.ServiceVideoLogDao;
 import com.gangukeji.xzqn.dao.ServiceVideosDao;
@@ -65,6 +66,7 @@ public class ServiceVideosController {
         XzqnServiceVideos videos = builderTime.fromJson(data, XzqnServiceVideos.class);
         videos.setLikeNums(0);
         videos.setVideoReadNums(0);
+        videos.setVideoDate(now);
         Integer videoId = serviceVideosDao.save(videos).getId();
         HashMap<Object, Object> map = new HashMap<>();
         map.put("videoId", videoId);
@@ -94,11 +96,16 @@ public class ServiceVideosController {
     public Result videosUpdate(@RequestBody String data) throws Exception{
 
         JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
-        Integer videoId=jsonObject.get("videoId").getAsInt();
+        Integer videoId=jsonObject.get("id").getAsInt();
         XzqnServiceVideos videos=serviceVideosDao.findById(videoId).get();
+        Integer LikeNums=videos.getLikeNums();
+        Integer videoReadNums=videos.getVideoReadNums();
         videos = builderTime.fromJson(data, XzqnServiceVideos.class);
+        videos.setVideoDate(now);
+        videos.setLikeNums(LikeNums);
+        videos.setVideoReadNums(videoReadNums);
         serviceVideosDao.save(videos);
-        return ResultUtils.success(200,"修改视频信息成功",videos);
+        return ResultUtils.success(200,"修改视频信息成功",serviceVideosDao.save(videos));
     }
 
     //删除视频
@@ -140,11 +147,26 @@ public class ServiceVideosController {
         Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
         return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
     }
+    //根据人气查询所有视频
+    @PostMapping("/videosLikeFindAll")
+    public Result findAllLikeRead(@RequestBody String data) throws  Exception {
+        Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
+        Sort sort = new Sort(Sort.Direction.DESC, "like");
+        Pageable pageable = PageRequest.of(page, 5, sort);
+        Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
+        return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
+    }
+
+
     //查询单个视频
     @PostMapping("/videosFind")
     public Result findVideos(@RequestBody String data){
         Integer id = new JsonParser().parse(data).getAsJsonObject().get("id").getAsInt();
-        return ResultUtils.success(200,"查询视频成功",serviceVideosDao.findById(id));
+        XzqnServiceVideos videos=serviceVideosDao.findById(id).get();
+        videos.setVideoReadNums(videos.getVideoReadNums()+1);
+        videos.setLikeNums(videoLikeDao.findCountLike(id));
+        serviceVideosDao.save(videos);
+        return ResultUtils.success(200,"查询视频成功",videos);
     }
 
 
@@ -168,6 +190,7 @@ public class ServiceVideosController {
 
     //查看收藏的视频列表并按照收藏时间先后排序
     @PostMapping("/videosCollectFindV2")
+    @Log
     public Result findCollectVideosV2(@RequestBody String data){
         Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
         Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
@@ -176,6 +199,42 @@ public class ServiceVideosController {
         List<Integer> users = videoLogDao.findByCollectAndTime(userId,pageable);
         List<XzqnServiceVideos> videos=serviceVideosDao.findAllById(users);
         return  ResultUtils.success(200,"查询收藏的视频成功",videos);
+    }
+
+    //判断是否收藏
+    @PostMapping("/isCollect")
+    public Result videosV2(@RequestBody String data) throws Exception{
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer userId=jsonObject.get("userId").getAsInt();
+        Integer videoId=jsonObject.get("videoId").getAsInt();
+        XzqnServiceVideoLog videoLog=videoLogDao.findByVideolog(userId,videoId);
+        HashMap<String,String> map=new HashMap<>();
+        if(videoLogDao.findByVideolog(userId,videoId)==null){
+            msg="未收藏";
+            map.put("isCollect","0");
+        }else {
+            msg="已收藏";
+            map.put("isCollect","1");
+        }
+        return ResultUtils.success(200,msg,map);
+    }
+
+    //判断是否点赞
+    @PostMapping("/isLike")
+    public Result VideosV2(@RequestBody String data) throws Exception{
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer userId=jsonObject.get("userId").getAsInt();
+        Integer videoId=jsonObject.get("videoId").getAsInt();
+        XzqnServiceVideoLog videoLog=videoLogDao.findByVideolog(userId,videoId);
+        HashMap<String,String> map=new HashMap<>();
+        if(videoLogDao.findByVideolog(userId,videoId)==null){
+            msg="未收藏";
+            map.put("isLilk","0");
+        }else {
+            msg="已收藏";
+            map.put("isLilk","1");
+        }
+        return ResultUtils.success(200,msg,map);
     }
 
     //收藏视频接口

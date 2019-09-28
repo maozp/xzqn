@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,9 +21,11 @@ public class XzqnNews {
     private Integer id;
     @Column
     private String newsTitle;
-    @Column(name = "news_date")
+    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+    @CreationTimestamp
     private Date newsDate;
     @Column(name = "news_content",columnDefinition = "MEDIUMTEXT")
+    @JsonIgnore
     private String newsContent;
     @Column
     private Integer newsReadNums;

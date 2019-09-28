@@ -3,6 +3,7 @@ package com.gangukeji.xzqn.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class XzqnNewsLike {
     @Column
     private Integer newsId;
 
-    @Column
+    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+    @CreationTimestamp
     private Date likeTime;
 }
