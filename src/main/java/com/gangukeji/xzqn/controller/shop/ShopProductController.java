@@ -46,10 +46,15 @@ public class ShopProductController {
     private Result productAdd(@RequestBody XzqnShopProductInfo product) {
         XzqnShopProductInfo save;
         if(product.getProductId()==null){
+            product.setPublishStatus(1);
+            product.setDes("@ @ @ @ @ @");
             save=productDao.save(product);
         }else{
             save = productDao.findById(product.getProductId()).orElse(product);
+            //product.setDes("");
+            product.setDes("@ @ @ @ @ @");
             Utils.copyPropertiesIgnoreNull(product, save);
+
             save = productDao.save(save);
         }
         return ResultUtils.success(200, "商品添加|更新成功", save);

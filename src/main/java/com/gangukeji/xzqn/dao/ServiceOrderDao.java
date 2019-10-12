@@ -22,6 +22,9 @@ import java.util.Optional;
 @Transactional
 public interface ServiceOrderDao extends JpaRepository<XzqnServiceOrder, Integer> {
 
+    //SELECT receive_user_id FROM xzqn_service_order WHERE order_id=348
+    @Query(value = "SELECT receive_user_id FROM xzqn_service_order WHERE order_id=?1 ",nativeQuery=true)
+    Integer findByReceiveUserId(Integer orderId);
     //计算订单总数
     //SELECT COUNT(order_id) FROM xzqn_service_order
     @Query(value = "SELECT COUNT(order_id) FROM xzqn_service_order ",nativeQuery=true)

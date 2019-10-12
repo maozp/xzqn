@@ -25,7 +25,6 @@ public class XzqnNewsLog {
     @Column
     private Integer collectNewsId;
 
-    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
     @CreationTimestamp
     private Date collectTime;
 

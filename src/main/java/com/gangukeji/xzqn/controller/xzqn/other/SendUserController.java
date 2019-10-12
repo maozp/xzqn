@@ -1,5 +1,6 @@
 package com.gangukeji.xzqn.controller.xzqn.other;
 
+import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.dao.SendUserDao;
 import com.gangukeji.xzqn.dao.UserDao;
 import com.gangukeji.xzqn.entity.XzqnUserSend;
@@ -34,6 +35,7 @@ public class SendUserController {
     WebSocket webSocket;
 
     @RequestMapping("auth/send/add")
+    @Log
     public Result addSendAuth(@RequestBody String data) {
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         XzqnUserSend userSend = new Gson().fromJson(data, XzqnUserSend.class);
@@ -42,7 +44,6 @@ public class SendUserController {
         XzqnUserSend save = sendUserDao.findById(sendUserId).get();
         Utils.copyPropertiesIgnoreNull(userSend, save);
         save = sendUserDao.save(save);
-
 
         //发单方来了.mp3
         webSocket.sendMessage("有新的发单用户需认证");

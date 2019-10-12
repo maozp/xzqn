@@ -103,7 +103,7 @@ public interface ServicePublishDao extends JpaRepository<XzqnServicePublish, Int
      * 通过原生sql 进行查询
      * 开启nativeQuery=true，在value里可以用原生SQL语句完成查询
      */
-    @Query("select u from XzqnServicePublish u ORDER BY CASE u.isCheck when 0 then 1 when 1 then 2 when -1 then 3 end ")
+    @Query("select u from XzqnServicePublish u ORDER BY CASE u.isCheck when 0 then 1 when 1 then 2 when -1 then 3 when 9 then 4 end ")
     Page<XzqnServicePublish> findAllByIsCheck1(Pageable pageable);
 
     @Query("select new XzqnServicePublish(id,sendUserId,  name,  phone,  userId,  factorId,  companyName,  companyPhone,  serviceDesc,  serviceAddr,  lat,  lng,  totalFee,  isCancel,  status,  createTime,  json,serviceFee,receiveUserIdList,isCheck,refuseReason)from XzqnServicePublish where sendUserId=?1 and status<?2")

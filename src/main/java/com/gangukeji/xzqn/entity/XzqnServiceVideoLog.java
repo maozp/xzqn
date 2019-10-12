@@ -24,7 +24,7 @@ public class XzqnServiceVideoLog {
     @Column
     private Integer videoId;
 
-    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+
     @CreationTimestamp
     private Date collectTime;
 }

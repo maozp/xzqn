@@ -21,7 +21,7 @@ public class XzqnNews {
     private Integer id;
     @Column
     private String newsTitle;
-    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+
     @CreationTimestamp
     private Date newsDate;
     @Column(name = "news_content",columnDefinition = "MEDIUMTEXT")

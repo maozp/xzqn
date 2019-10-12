@@ -106,6 +106,8 @@ public class ListGrabOrderControllerV3 {
 
         // 1算距离 2factor 3状态名描述 4去掉 cancel
         //setGrabList(grabList, jsonObject);
+        setGrabListV2(grabList);
+
         setReceiveUserIdList(grabList);
         return ResultUtils.success(200, msg, grabList);
     }
@@ -202,6 +204,35 @@ public class ListGrabOrderControllerV3 {
         buildMultiGrabDes(publishList, userId);
 
 
+    }
+
+    /**
+     * 1算距离 2factorName 3状态名描述 4去掉 cancel
+     *
+     * @param publishList
+     * @param
+     */
+    private void setGrabListV2(List<XzqnServicePublish> publishList) {
+        //设置距离 通过前端传的userId
+
+        //设置factor
+        try {
+            publishList.forEach(e -> e.setFactorName(factorDao.findById(e.getFactorId()).get().getName()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            publishList.forEach(e1 -> e1.setFactorName("政府"));
+        }
+        //设置status名描述v3
+        List<XzqnServiceOrderStatus> statusList = statusDao.findAll();
+        Map<Integer, XzqnServiceOrderStatus> statusMap = new HashMap<>();
+        statusList.forEach(e -> statusMap.put(e.getStatus(), e));
+        publishList.forEach(publish -> {
+            Integer status = publish.getStatus();
+            XzqnServiceOrderStatus statusNow = statusMap.get(status);
+            publish.setStatusName(statusNow.getReceiveName());
+            publish.setStatusDes(statusNow.getReceiveDes());
+
+        });
     }
 
     /**

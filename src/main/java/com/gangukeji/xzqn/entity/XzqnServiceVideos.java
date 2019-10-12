@@ -29,7 +29,7 @@ public class XzqnServiceVideos {
     private String videoDes;
     @Column(name = "video_type")
     private String videoType;
-    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+
     @CreationTimestamp
     private Date videoDate;
     @Column(name = "video_addr")

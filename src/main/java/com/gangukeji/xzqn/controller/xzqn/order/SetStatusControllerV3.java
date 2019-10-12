@@ -109,7 +109,7 @@ public class SetStatusControllerV3 {
             xzqnMessageAdvice.setContent(name.charAt(0)+"师傅抢到了一个新的订单");
             xzqnMessageAdvice.setTime(order.getUpdateTime());
             messageAdvice.save(xzqnMessageAdvice);
-            return ResultUtils.success(200, "操作成功orderId:", orderId);
+            return ResultUtils.success(200, "确认师傅成功", orderId);
         }
         int id = jsonObject.get("orderId").getAsInt();
         Integer orderStatus = orderDao.getStatus(id);
@@ -212,6 +212,9 @@ public class SetStatusControllerV3 {
     public Result noPay(@RequestBody String data) {
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         int orderId = jsonObject.get("orderId").getAsInt();
+
+        int receiveUserId=orderDao.findByReceiveUserId(orderId);
+        authSignDao.addSignCard(receiveUserId);
 
         orderDao.updateIsPayByOrderId(true, orderId);
         orderDao.updateOrderStatus(11, orderId);
@@ -358,6 +361,8 @@ public class SetStatusControllerV3 {
         String totalFee;
         try {
             int orderId = jsonObject.get("orderId").getAsInt();
+            int receiveUserId=orderDao.findByReceiveUserId(orderId);
+            authSignDao.addSignCard(receiveUserId);
             XzqnServiceOrder order = orderDao.findById(orderId).get();
             Integer userId = order.getUserId();
             totalFee = jsonObject.get("totalFee").getAsString().trim().replace(".", "");

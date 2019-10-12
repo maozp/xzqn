@@ -235,8 +235,8 @@ public class LoginController {
         receive.setIsBan(false);
         receive.setAuthType("未认证");
         receive.setCompanyName("赣谷科技");
-        receive.setNickname("小正青年");
-        receive.setName("小正青年");
+        receive.setNickname("");
+        receive.setName("");
         receive.setIntroduceIds("3,5");
         receive.setIntroduce("视频监控@");
         receive.setAddrDes("南昌");
@@ -249,7 +249,7 @@ public class LoginController {
         receive.setGoodAt("擅长维修各种监控设备");
         receive.setPromise("售后30天保修");
         receive.setHeadImg("https://www.xiaozheng8.com/file/1559396271977395978.png");
-        receive.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        receive.setPhone("");
         receive.setLat(new BigDecimal(29.545380));
         receive.setLng(new BigDecimal(115.944220));
         receive.setTurnover90(new BigDecimal(0));
@@ -264,9 +264,9 @@ public class LoginController {
 
         send.setIsVip(false);
         send.setMark("小正青年大有可为");
-        send.setNickname("小正青年");
-        send.setName("小正青年");
-        send.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        send.setNickname("");
+        send.setName("");
+        send.setPhone("");
         send.setCompanyName("赣谷科技");
         send.setCompanyAddr("金沙大道");
         send.setDepartmentName("人力资源部");
@@ -281,7 +281,7 @@ public class LoginController {
         user.setPassword(null);
         user.setUserPhone(userPhone);
         user.setOpenid(openid);
-        user.setName("小正青年");
+        user.setName("小正青年"+ RandomUtils.nextInt(10000, 99999));
         user.setUserHeadImg("https://www.xiaozheng8.com/1561174082137609928.png");
         user.setUserLevel(1);
         user.setMark("小正青年大有可为");
@@ -440,8 +440,8 @@ public class LoginController {
         receive.setIsBan(false);
         receive.setAuthType("未认证");
         receive.setCompanyName("赣谷科技");
-        receive.setNickname("小正青年");
-        receive.setName("小正青年");
+        receive.setNickname("");
+        receive.setName("");
         receive.setIntroduceIds("3,5");
         receive.setIntroduce("视频监控@");
         receive.setAddrDes("南昌");
@@ -454,7 +454,7 @@ public class LoginController {
         receive.setGoodAt("擅长维修各种监控设备");
         receive.setPromise("售后30天保修");
         receive.setHeadImg("https://www.xiaozheng8.com/file/1559396271977395978.png");
-        receive.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        receive.setPhone("");
         receive.setLat(new BigDecimal(29.545380));
         receive.setLng(new BigDecimal(115.944220));
         receive.setTurnover90(new BigDecimal(0));
@@ -469,9 +469,9 @@ public class LoginController {
 
         send.setIsVip(false);
         send.setMark("小正青年大有可为");
-        send.setNickname("小正青年");
-        send.setName("小正青年");
-        send.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        send.setNickname("");
+        send.setName("");
+        send.setPhone("");
         send.setCompanyName("赣谷科技");
         send.setCompanyAddr("金沙大道");
         send.setDepartmentName("人力资源部");
@@ -488,7 +488,7 @@ public class LoginController {
         user.setUnionid(unionid);
         user.setUserPhone(null);
         user.setRongToken(null);
-        user.setName("小正青年");
+        user.setName("小正青年"+ RandomUtils.nextInt(10000, 99999));
         user.setUserHeadImg("https://www.xiaozheng8.com/1561174082137609928.png");
         user.setUserLevel(1);
         user.setMark("小正青年大有可为");
@@ -569,8 +569,8 @@ public class LoginController {
         receive.setIsBan(false);
         receive.setAuthType("未认证");
         receive.setCompanyName("赣谷科技");
-        receive.setNickname("小正青年");
-        receive.setName("小正青年");
+        receive.setNickname("");
+        receive.setName("");
         receive.setIntroduceIds("3,5");
         receive.setIntroduce("视频监控@");
         receive.setAddrDes("南昌");
@@ -583,7 +583,7 @@ public class LoginController {
         receive.setGoodAt("擅长维修各种监控设备");
         receive.setPromise("售后30天保修");
         receive.setHeadImg("https://www.xiaozheng8.com/file/1559396271977395978.png");
-        receive.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        receive.setPhone("");
         receive.setLat(new BigDecimal(29.545380));
         receive.setLng(new BigDecimal(115.944220));
         receive.setTurnover90(new BigDecimal(0));
@@ -598,9 +598,9 @@ public class LoginController {
 
         send.setIsVip(false);
         send.setMark("小正青年大有可为");
-        send.setNickname("小正青年");
-        send.setName("小正青年");
-        send.setPhone("156" + RandomUtils.nextInt(10000000, 99999999));
+        send.setNickname("");
+        send.setName("");
+        send.setPhone("");
         send.setCompanyName("赣谷科技");
         send.setCompanyAddr("金沙大道");
         send.setDepartmentName("人力资源部");
@@ -616,7 +616,7 @@ public class LoginController {
         user.setOpenid(openid);
         user.setUnionid(unionid);
         user.setUserPhone(null);
-        user.setName("小正青年");
+        user.setName("小正青年"+ RandomUtils.nextInt(10000, 99999));
         user.setUserHeadImg("https://www.xiaozheng8.com/1561174082137609928.png");
         user.setUserLevel(1);
         user.setMark("小正青年大有可为");

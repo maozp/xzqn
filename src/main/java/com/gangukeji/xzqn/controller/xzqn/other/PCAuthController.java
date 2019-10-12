@@ -53,7 +53,7 @@ public class PCAuthController {
 
 
     @PostMapping("auth/skill/findAll")
-    public String skillFindAllV2(@PageableDefault Pageable pageable) throws Exception {
+    public String skillFindAll(@PageableDefault Pageable pageable) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         SimpleModule module = new SimpleModule();
         module.addSerializer(XzqnAuthSkill.class, new AuthSkillSerialize());
@@ -215,9 +215,9 @@ public class PCAuthController {
         //分页+排序查询演示：
         //Pageable pageable = new PageRequest(page, size);//2.0版本后,该方法已过时
         Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
-        Sort sort = new Sort(Sort.Direction.DESC, "updateTime","createTime");
-        Pageable pageable = PageRequest.of(page, 5, sort);
-        Page<XzqnUserSend> sendUsers = sendUserDao.findAll(pageable);
+        //Sort sort = new Sort(Sort.Direction.DESC, "updateTime","createTime");
+        Pageable pageable = PageRequest.of(page, 5);
+        Page<XzqnUserSend> sendUsers = sendUserDao.findByPcSendNums(pageable);
         return sendUsers;
     }
 

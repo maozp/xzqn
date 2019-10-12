@@ -117,11 +117,15 @@ public class XzqnUserReceive {
     private Integer serveCount;
     //投诉数
     private Integer complaintCount;
-    //好评率
+    //好评数
     private Integer goodCount;
     @Deprecated
     //被关注数
     private Integer starts;
+
+    //我关注的数
+    private String myStarNums;
+
     @Transient
     //用户id
     private Integer userId;

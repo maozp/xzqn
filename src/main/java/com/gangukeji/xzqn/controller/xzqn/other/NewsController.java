@@ -109,9 +109,12 @@ public class NewsController {
 
         news =gson.fromJson(data, XzqnNews.class);
         String newsContent=news.getNewsContent();
-        newsContent="<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
-                "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+        newsContent="<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                 "<head>\n" +
+                "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes\" />\n" +
+                "<meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />\n" +
+                "<meta name=\"format-detection\" content=\"telephone=no\" />\n" +
+                "<style > img{max-width:100%;}</style>\n" +
                 "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n" +
                 "<title>"+news.getNewsTitle() +"</title>\n" +
                 "</head>"+newsContent+"</body>\n" +
@@ -279,6 +282,7 @@ public class NewsController {
             newsLikeDao.save(newsLike);
 
             xzqnNews.setNewsLikeNums(xzqnNews.getNewsLikeNums()+1);
+            newsDao.save(xzqnNews);
             msg="点赞成功";
             rmsg="1";
         }else {
@@ -287,9 +291,10 @@ public class NewsController {
             newsLikeDao.delete(newsLike);
 
             xzqnNews.setNewsLikeNums(xzqnNews.getNewsLikeNums()-1);
+            newsDao.save(xzqnNews);
             rmsg="0";
         }
-        newsDao.save(xzqnNews);
+
         return ResultUtils.success(200,msg,rmsg);
     }
 
@@ -329,11 +334,15 @@ public class NewsController {
         XzqnUser xzqnUser=userDao.findById(userId).get();
         news.setUserName(xzqnUser.getName());
         news.setUserHeadImg(xzqnUser.getUserHeadImg());
-        news.setCommentTime(now);
         news.setComment(comment);
         news.setNewsId(newsId);
+        news.setCommentTime(now);
         msg="留言成功";
         newsCommentDao.save(news);
+        XzqnNews news1=newsDao.findById(newsId).get();
+        news1.setNewsCommentNums(newsCommentDao.findCountComment(newsId));
+        //news1.setNewsLikeNums(newsLikeDao.findCountLike(newsId));
+        newsDao.save(news1);
         return ResultUtils.success(200,msg,news);
     }
 

@@ -22,7 +22,7 @@ public class XzqnNewsComment {
     private Integer userId;
     @Column
     private String userName;
-    @Column(insertable = false, columnDefinition = "timestamp default current_timestamp", updatable = false)
+
     @CreationTimestamp
     private Date commentTime;
     @Column(name = "comment",columnDefinition = "TEXT")

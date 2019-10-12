@@ -1,11 +1,14 @@
 package com.gangukeji.xzqn.controller.shop;
 
+import com.gangukeji.xzqn.dao.AppBannerDao;
 import com.gangukeji.xzqn.dao.ShopCateDao;
 import com.gangukeji.xzqn.dao.ShopProductInfoDao;
+import com.gangukeji.xzqn.entity.XzqnAppBanner;
 import com.gangukeji.xzqn.entity.shop.XzqnShopCate;
 import com.gangukeji.xzqn.entity.shop.XzqnShopProductInfo;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +34,8 @@ public class ShopHomeController {
     ShopProductInfoDao productDao;
     @Resource
     ShopCateDao cateDao;
+    @Autowired
+    AppBannerDao appBannerDao;
 
     /**
      * 初始化新品数据
@@ -77,23 +81,47 @@ public class ShopHomeController {
      * 轮播图设置,资源放在apache/xzqn下面
      * @return
      */
+//    @PostMapping({"recycle"})
+//    private Result recycle() {
+//        HashMap<String, List> resp = new HashMap<>();
+//        HashMap<String, Object> item1 = new HashMap<>();
+//        item1.put("url", "https://www.xiaozheng8.com/banner1");
+//        item1.put("banner", "http://www.xiaozheng8.com/xzqn/shop/recycle1.png");
+//        HashMap<String, Object> item2 = new HashMap<>();
+//        item2.put("url", "https://www.xiaozheng8.com/banner2");
+//        item2.put("banner", "http://www.xiaozheng8.com/xzqn/shop/recycle2.png");
+//        HashMap<String, Object> item3 = new HashMap<>();
+//        item3.put("url", "https://www.xiaozheng8.com/banner3");
+//        item3.put("banner", "http://www.xiaozheng8.com/xzqn/shop/recycle3.png");
+//        ArrayList<Map> bannerList = new ArrayList<>();
+//        bannerList.add(item1);
+//        bannerList.add(item2);
+//        bannerList.add(item3);
+//        resp.put("bannerList", bannerList);
+//        return ResultUtils.success(200,"轮播图获取成功",resp);
+//    }
+
+    //小程序不想改重新上线，只能这么写，不然轮播图不能显示图片
     @PostMapping({"recycle"})
-    private Result recycle() {
+     private Result recycle() {
+        XzqnAppBanner xzqnAppBanner=appBannerDao.findById(2).get();
+        HashMap<String, String> map=new HashMap<>();
         HashMap<String, List> resp = new HashMap<>();
-        HashMap<String, Object> item1 = new HashMap<>();
-        item1.put("url", "https://www.xiaozheng8.com/banner1");
-        item1.put("banner", "http://www.xiaozheng8.com/xzqn/shop/recycle1.png");
-        HashMap<String, Object> item2 = new HashMap<>();
-        item2.put("url", "https://www.xiaozheng8.com/banner2");
-        item2.put("banner", "http://www.xiaozheng8.com/xzqn/shop/recycle2.png");
-        HashMap<String, Object> item3 = new HashMap<>();
-        item3.put("url", "https://www.xiaozheng8.com/banner3");
-        item3.put("banner", "http://www.xiaozheng8.com/xzqn/shop/recycle3.png");
         ArrayList<Map> bannerList = new ArrayList<>();
-        bannerList.add(item1);
-        bannerList.add(item2);
-        bannerList.add(item3);
-        resp.put("bannerList", bannerList);
-        return ResultUtils.success(200,"轮播图获取成功",resp);
+        try {
+            HashMap<String, Object> item1 = new HashMap<>();
+            item1.put("banner",xzqnAppBanner.getImg().split("@")[0]);
+            HashMap<String, Object> item2 = new HashMap<>();
+            item2.put("banner",xzqnAppBanner.getImg().split("@")[1]);
+            HashMap<String, Object> item3 = new HashMap<>();
+            item3.put("banner",xzqnAppBanner.getImg().split("@")[2]);
+            bannerList.add(item1);
+            bannerList.add(item2);
+            bannerList.add(item3);
+            resp.put("bannerList",bannerList);
+        }catch (Exception e){
+            return ResultUtils.error(-1,"请上传三张轮播图片");
+        }
+        return ResultUtils.success(200,"查看banner成功",resp);
     }
 }

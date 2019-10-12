@@ -138,23 +138,23 @@ public class ServiceVideosController {
         Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
         return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
     }
-    //根据人气查询所有视频
+    //根据阅读数查询所有视频
     @PostMapping("/videosReadFindAll")
     public Result findAllVideosRead(@RequestBody String data) throws  Exception {
         Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "videoReadNums");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
-        return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
+        return ResultUtils.success(200, "根据阅读数查询视频列表信息成功", sendUsers);
     }
-    //根据人气查询所有视频
+    //根据点赞数查询所有视频
     @PostMapping("/videosLikeFindAll")
     public Result findAllLikeRead(@RequestBody String data) throws  Exception {
         Integer page = new JsonParser().parse(data).getAsJsonObject().get("page").getAsInt();
         Sort sort = new Sort(Sort.Direction.DESC, "like");
         Pageable pageable = PageRequest.of(page, 5, sort);
         Page<XzqnServiceVideos> sendUsers = serviceVideosDao.findAll(pageable);
-        return ResultUtils.success(200, "查询视频列表信息成功", sendUsers);
+        return ResultUtils.success(200, "根据点赞数查询视频列表信息成功", sendUsers);
     }
 
 
@@ -225,13 +225,13 @@ public class ServiceVideosController {
         JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
         Integer userId=jsonObject.get("userId").getAsInt();
         Integer videoId=jsonObject.get("videoId").getAsInt();
-        XzqnServiceVideoLog videoLog=videoLogDao.findByVideolog(userId,videoId);
+        XzqnServiceVideoLike videoLike=videoLikeDao.findByVideoLike(userId,videoId);
         HashMap<String,String> map=new HashMap<>();
-        if(videoLogDao.findByVideolog(userId,videoId)==null){
-            msg="未收藏";
+        if(videoLikeDao.findByVideoLike(userId,videoId)==null){
+            msg="未点赞";
             map.put("isLilk","0");
         }else {
-            msg="已收藏";
+            msg="已点赞";
             map.put("isLilk","1");
         }
         return ResultUtils.success(200,msg,map);

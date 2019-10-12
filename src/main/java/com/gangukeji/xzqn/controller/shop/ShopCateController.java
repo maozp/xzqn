@@ -1,6 +1,7 @@
 package com.gangukeji.xzqn.controller.shop;
 
 import com.gangukeji.xzqn.dao.ShopCateDao;
+import com.gangukeji.xzqn.dao.ShopProductInfoDao;
 import com.gangukeji.xzqn.entity.XzqnNews;
 import com.gangukeji.xzqn.entity.view.BigCate;
 import com.gangukeji.xzqn.entity.view.SmallCate;
@@ -31,6 +32,8 @@ import java.util.List;
 public class ShopCateController {
     @Resource
     private ShopCateDao cateDao;
+    @Resource
+    ShopProductInfoDao productDao;
 
     /**
      * 增
@@ -49,9 +52,11 @@ public class ShopCateController {
         Integer cateId = new JsonParser().parse(data).getAsJsonObject().get("cateId").getAsInt();
         try {
             cateDao.deleteById(cateId);
+            productDao.deleteProductByCateId(cateId);
         } catch (Exception e) {
             return ResultUtils.error(-1, "not exist");
         }
+
         return ResultUtils.success(200, "object删除成功", cateId);
     }
 

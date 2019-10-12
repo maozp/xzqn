@@ -225,8 +225,10 @@ public class AddOrderController {
 
     @PostMapping("serviceOrder/update")
     @Log("修改订单")
-    public Result updateOrder(@RequestBody String data,@RequestParam(value="publishId") Integer publishId) throws Exception {
+    public Result updateOrder(@RequestBody String data) throws Exception {
         //有ID修改，没有ID新增
+        JsonObject jsonObject=new JsonParser().parse(data).getAsJsonObject();
+        Integer publishId=jsonObject.get("publishId").getAsInt();
         XzqnServicePublish publish=publishDao.findById(publishId).get();
         data = data.replaceAll("feeItemds", "fuck feeItemIds");
          publish = gson.fromJson(data, XzqnServicePublish.class);

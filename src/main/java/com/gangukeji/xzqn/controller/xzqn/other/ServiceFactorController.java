@@ -5,6 +5,9 @@ import com.gangukeji.xzqn.dao.UserFactorDao;
 import com.gangukeji.xzqn.entity.XzqnUserFactor;
 import com.gangukeji.xzqn.utils.Result;
 import com.gangukeji.xzqn.utils.ResultUtils;
+import com.google.gson.JsonParser;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,4 +43,12 @@ public class ServiceFactorController {
         });
         return ResultUtils.success(200, "success", resp);
     }
+
+    @PostMapping("findById")
+    public Result findByIdv2(@RequestBody String data) {
+        Integer factorId = new JsonParser().parse(data).getAsJsonObject().get("factorId").getAsInt();
+
+        return ResultUtils.success(200,"获取客户类型成功",factorDao.findById(factorId));
+    }
+
 }

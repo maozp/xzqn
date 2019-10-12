@@ -1,6 +1,7 @@
 package com.gangukeji.xzqn.controller.xzqn.other;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
+import com.gangukeji.xzqn.config.Log;
 import com.gangukeji.xzqn.dao.AuthSignDao;
 import com.gangukeji.xzqn.dao.AuthSignLogDao;
 import com.gangukeji.xzqn.dao.ReceiveUserDao;
@@ -154,7 +155,7 @@ public class AuthSignController {
      */
     @PostMapping("/signV2")
     public Result doSignV2(@RequestBody String data) throws Exception{
-
+        Date now = new Date();
         Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
         XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(userId);
         XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
@@ -255,7 +256,7 @@ public class AuthSignController {
     public Result signView(@RequestBody String data){
 
         Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
-        if(authSignDao.findTopByUserIdOrderByIdDesc(userId)==null){
+        if(authSignDao.findTopByUserIdOrderByIdDesc(userId)==null ){
             XzqnAuthSign authSign = gson.fromJson(data, XzqnAuthSign.class);
             authSign.setIsSign(0);
             authSign.setSignPoint(0);
@@ -266,6 +267,9 @@ public class AuthSignController {
             return ResultUtils.success(200, "查找签到信息成功", authSign);
         }
         XzqnAuthSign authSign = authSignDao.findTopByUserIdOrderByIdDesc(userId);
+        if(authSign.getSignTime()==null){
+            return ResultUtils.success(200, "查找签到信息成功", authSign);
+        }
         Date now = new Date();
         if(authSign.getSignLastTime()==null){
             return ResultUtils.success(200, "查找签到信息成功", authSign);
@@ -304,9 +308,18 @@ public class AuthSignController {
     }
     //补签接口
     @PostMapping("replacementDate")
+    @Log
     public Result replacement(@RequestBody String data)throws Exception{
         XzqnAuthSignLog authSignLog=gson.fromJson(data,XzqnAuthSignLog.class);
         XzqnAuthSign authSign = authSignDao.findXzqnAuthSignByAndUserId(authSignLog.getUserId());
+
+        Integer userId = new JsonParser().parse(data).getAsJsonObject().get("userId").getAsInt();
+        String signTime=new JsonParser().parse(data).getAsJsonObject().get("signTime").getAsString();
+        signTime=signTime.substring(0,10);
+        System.out.println(signTime);
+            if(authSignLogDao.isSign(userId,signTime)!=null){
+                return ResultUtils.error(-1,"补签失败，当前补签日期已签到");
+            }
 
         System.out.println(authSignLog.getSignTime().toString());
         //最后签到时间15天之前

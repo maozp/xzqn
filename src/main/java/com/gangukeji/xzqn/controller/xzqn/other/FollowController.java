@@ -76,7 +76,7 @@ public class FollowController {
         List<XzqnUserReceive> userReceives = receiveUserDao.findAllById(ids);
         return ResultUtils.success(200, "已关注的师傅列表", userReceives);
     }
-    @Log("查找是否关注该师傅")
+    @Log("查找我关注的师傅")
     @PostMapping("user/isStar")
     public Result findIsStar(@RequestBody String data) {
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
@@ -91,4 +91,5 @@ public class FollowController {
         }
         return ResultUtils.success(200,"查询是否关注成功",isStar);
     }
+
 }

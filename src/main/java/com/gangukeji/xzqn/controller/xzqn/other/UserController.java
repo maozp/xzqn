@@ -60,6 +60,8 @@ public class UserController {
     AuthContentDao authContentDao;
     @Resource
     AuthPersonDao authPersonDao;
+    @Resource
+    FollowDao followDao;
 
 
     /**
@@ -173,6 +175,8 @@ public class UserController {
         Integer receiveUserId = userDao.getReceiveUserIdByUserId(userId);
         XzqnUserReceive userReceive = receiveUserDao.findById(receiveUserId).get();
         userReceive.setUserId(userId);
+        userReceive.setStarts(followDao.findByStarMeNums(userId));
+        userReceive.setMyStarNums(followDao.findByMyStarNums(userId).toString());
         buildReceiveUser(userReceive,userId);
         return ResultUtils.success(200, "成功查找师傅详情", userReceive);
     }

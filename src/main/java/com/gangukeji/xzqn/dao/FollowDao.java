@@ -23,6 +23,14 @@ public interface FollowDao extends JpaRepository<XzqnFollow, Integer> {
 
     List<XzqnFollow> findByUserIdAndStatus(Integer userId, Boolean status);
 
+    //查询我关注的人数
+    @Query(value = "SELECT COUNT(user_id_fl) FROM xzqn_follow where user_id=?1 and `status`=1",nativeQuery = true)
+    Integer findByMyStarNums(Integer userId);
+
+    //查询关注我的人数
+    @Query(value = "SELECT COUNT(user_id) FROM xzqn_follow where user_id_fl=?1 and `status`=1",nativeQuery = true)
+    Integer findByStarMeNums(Integer userId);
+
     /*
      * 更新关注状态
      * */

@@ -21,6 +21,7 @@ import java.util.Optional;
 public interface AuthPersonDao extends JpaRepository<XzqnAuthPerson, Integer> {
     XzqnAuthPerson findTopByReceiveUserIdOrderByIdDesc(int receiveUserId);
 
+
     /*
      * 更新审核状态
      * */
